@@ -1,2 +1,4 @@
 .DS_Store
 android/bin/*
+server/war/WEB-INF/classes/*
+
