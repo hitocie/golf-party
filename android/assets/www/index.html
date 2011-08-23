@@ -18,25 +18,27 @@
 <body>
 	<div data-role="page">
 	
-	<!-- header -->
-	<div data-role="header">
-		<h1>Golf Party</h1>
-	</div>
-	
-	<!-- content -->
-	<div data-role="content">
-		<p>Page content goes here.</p>	
-		<a id="popup" href="#" data-role="button">ポップアップ</a>
-		<a href="test1/main.html" rel="external" data-role="button">画面1</a>
-	</div>
+		<!-- header -->
+		<div data-role="header">
+			<h1>Golf Party</h1>
+		</div>
 
-	<!-- footer -->
-	<div data-role="footer">
-		<div data-role="navbar">
-			<ul>
-				<li><a href="#" class="ui-btn-active" data-icon="home" data-iconpos="top">ホーム</a></li>
-				<li><a href="test2/main.html" rel="external" data-icon="grid" data-iconpos="top">画面2</a></li>
-			</ul>
+		<!-- content -->
+		<div data-role="content">
+			<p>Page content goes here.</p>	
+			<a id="popup" href="#" data-role="button">ポップアップ</a>
+			<!-- <a href="test1/main.html" rel="external" data-role="button">画面1</a> -->
+			<a href="test1/main.html" data-role="button">画面1</a>
+		</div>
+
+		<!-- footer -->
+		<div data-role="footer" data-position="fixed" data-id="persistent" data-theme="b">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#" class="ui-btn-active" data-icon="home" data-iconpos="top">ホーム</a></li>
+					<li><a href="test2/main.html" data-icon="grid" data-iconpos="top">画面2</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </body>
