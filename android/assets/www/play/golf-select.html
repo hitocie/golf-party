@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>PhoneGap</title>
+	<script type="text/javascript" charset="utf-8" src="../phonegap/phonegap-1.0.0.js"></script>
+
+	<link rel="stylesheet" href="../jquery/jquery.mobile-1.0b2.min.css" />
+	<script src="../jquery/jquery-1.6.2.min.js"></script>
+	<script src="../jquery/jquery.mobile-1.0b2.min.js"></script>
+
+	<link rel="stylesheet" href="menu.css" />
+	<script src="menu.js"></script>
+</head>
+
+<body>
+	<div data-role="page">
+
+		<!-- header -->
+		<div data-role="header">
+		<a href="#" data-icon="back" data-rel="back">戻る</a>
+			<h1>ゴルフ場検索</h1>
+		</div>
+
+		<!-- content -->
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" data-filter="true" >
+				<li><a href="#">大平台カントリークラブ</a></li>
+				<li><a href="#">ロぺ倶楽部</a></li>
+				<li><a href="#">習志野カントリークラブ</a></li>
+			</ul>
+		</div>
+
+		<!-- footer -->
+		<div data-role="footer" data-position="fixed" data-id="persistent" data-theme="b">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#" class="ui-btn-active" data-icon="home" data-iconpos="top">ホーム</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
