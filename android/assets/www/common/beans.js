@@ -27,7 +27,6 @@ Group.prototype.add_user = function(user) {
 	this.users.push(user);
 };
 
-/*
 // Hole
 var Hole = function(no, par, back_yard, white_yard, red_yard, handicap) {
 	this.no = no;
@@ -41,7 +40,7 @@ var Hole = function(no, par, back_yard, white_yard, red_yard, handicap) {
 // Half
 var Half = function(name) {
 	this.name = name; // IN or OUT or ...
-	this.holes = new Array(9);
+	this.holes = new Array(); // max 9 holes
 };
 Half.prototype.add_hole = function(hole) {
 	this.holes.push(hole);
@@ -68,21 +67,26 @@ var Score = function(score, putter, club, fairway, beach, penalty) {
 };
 
 // RoundMember
-var RoundMember = function(user) {
+var RoundMember = function(user, is_shared) {
 	this.user = user;
-	this.scores = new Array(18); // hole.1 - 18
+	this.is_shared = is_shared; // bool : Facebook/Google+ user?
+	this.scores = new Array(); // hole.1 - 18
 };
-RoundMember.prototype.set_socre = function(hole, score) {
+RoundMember.prototype.set_score = function(hole, score) {
 	this.scores[hole] = score;
 }
 
 // RoundGroup
 var RoundGroup = function() {
-	this.members = new Array(4); // max 4 members
+	this.round_members = new Array(); // max 4 members
 };
-RoundGroup.prototype.add_member = function(member) {
-	this.members.push(member);
+RoundGroup.prototype.add_round_member = function(round_member) {
+	this.round_members.push(round_member);
 };
+
+// Weather/Wind
+var Weather = {fine:'ê∞ÇÍ', cloudy:'ì‹ÇË', rainy:'âJ'};
+var Wind = {strong:'ã≠Ç¢', weak:'é„Ç¢'};
 
 // Round
 var Round = function(course, date, weather, wind, first_half, later_half) {
@@ -93,10 +97,9 @@ var Round = function(course, date, weather, wind, first_half, later_half) {
 	this.first_half = first_half; // IN or OUT
 	this.later_half = later_half; // IN or OUT
 	
-	this.groups = new Array();
+	this.round_groups = new Array();
 };
-Round.prototype.add_group = function(group) {
-	this.groups.push(round_group);
+Round.prototype.add_round_group = function(round_group) {
+	this.round_groups.push(round_group);
 }
 
-*/

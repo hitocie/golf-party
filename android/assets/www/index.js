@@ -8,19 +8,7 @@ $(window).load(function(){
 $(function() {
 	$('#popup').click(function() {
 		// click popup button
-		alert('Pushed popup button.');
-	});	
-});
-
-$(function() {
-	$('#hokada').click(function() {
-		/* click hokada button */		
-		var access_token = get_access_token();
-		if (access_token == null) {
-			save_access_token('12345');
-			access_token = get_access_token();
-		}
-		alert(access_token);
+		alert('Pushed popup button!!');
 	});	
 });
 
