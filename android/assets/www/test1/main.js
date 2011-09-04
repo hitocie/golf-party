@@ -24,62 +24,30 @@ $(function() {
 });
 
 
-function test_users() {
-	var users = new Array();
-	users.push(new User(100, 'Hitoshi Okada'));
-	users.push(new User(200, 'Yuki Arai'));
-	users.push(new User(300, 'Nao Okamoto'));
-	users.push(new User(400, 'Akira Mori'));
-	users.push(new User(500, 'Shingo Nishimura'));
-	users.push(new User(600, 'Hiroki Mino'));
-	users.push(new User(700, 'Takayuki Yoshida'));
-	users.push(new User(800, 'Moe Shiratori'));
-	users.push(new User(900, 'Shiomi-chi'));
-	users.push(new User(1000, 'TAKESHI'));
-	users.push(new User(1100, 'Kuro'));
-	users.push(new User(1200, 'Umemura'));
-	return users;
-}
-function test_course() {
-	var out_half = new Half('OUT');
-	for (var i = 0; i < 9; i++) {
-		out_half.add_hole(new Hole(i + 1, 5, 500, 400, 300, i + 1));
-	}
-	var in_half = new Half('IN');
-	for (var i = 0; i < 9; i++) {
-		in_half.add_hole(new Hole(i + 10, 4, 450, 350, 100, i + 10));
-	}
-	
-	var course = new Course('Great Golf Club', 'Tokyo, Japan');
-	course.add_half(out_half);
-	course.add_half(in_half);
-	return course;
-}
-
 $(function() {
 	$('#user-bean').click(function() {
-		var users = test_users();
-		var g1 = new Group();
+		var users = get_my_friends();
+		var g1 = new Group('group01');
 		for (var i in users) {
 			g1.add_user(users[i]);
 		}
-		alert(g1.users.length + ' ' + g1.users[1].name);
+		alert(g1.users.length + ' ' + g1.users[1].name + ' ' + g1.users[1].where);
 	});	
 });
 
 $(function() {
 	$('#round-bean').click(function() {
-		var users = test_users();
+		var users = get_my_friends();
 		// members to play together.
 		var rg1 = new RoundGroup();
-		rg1.add_round_member(new RoundMember(users[0], true));
-		rg1.add_round_member(new RoundMember(users[1], true));
-		rg1.add_round_member(new RoundMember(users[2], true));
-		rg1.add_round_member(new RoundMember(users[3], true));
+		rg1.add_round_member(new RoundMember(users[0]));
+		rg1.add_round_member(new RoundMember(users[1]));
+		rg1.add_round_member(new RoundMember(users[2]));
+		rg1.add_round_member(new RoundMember(users[3]));
 		console.log(rg1.round_members[0].user.name);
 		
 		// course info
-		var course = test_course();
+		var course = get_courses()[10];
 		console.log(course.name + ', ' + course.halfs[0].name + ' course, ' + course.halfs[0].holes[5].white_yard + 'yard');
 	
 		// round info
@@ -115,7 +83,7 @@ $(function() {
 				)
 		);
 		
-		alert(round.round_groups[0].round_members[0].scores[1].score);
+		alert('user:' + round.round_groups[0].round_members[0].user.name + ' score:' + round.round_groups[0].round_members[0].scores[1].score);
 	});	
 });
 

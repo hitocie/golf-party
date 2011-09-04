@@ -1,26 +1,15 @@
 
-// access token for Facebook
-var _access_token_name = 'facebook-access-token';
-function save_access_token(key) {
-	// use localStorage of PhoneGap
-	window.localStorage.setItem(_access_token_name, key);
-}
-function get_access_token() {
-	// use localStorage of PhoneGap
-	return window.localStorage.getItem(_access_token_name);
-}
-
-
-// ----- beans -----
-
 // User (me and friends)
-var User = function(id, name) {
+var UserWhere = {local:0, facebook:1, google_plus:2};
+var User = function(id, name, where) {
 	this.id = id;
 	this.name = name;
+	this.where = (arguments[2] ? where : UserWhere.local);
 };
 
 // Group
-var Group = function() {
+var Group = function(name) {
+	this.name = name;
 	this.users = new Array();
 };
 Group.prototype.add_user = function(user) {
@@ -67,9 +56,8 @@ var Score = function(score, putter, club, fairway, beach, penalty) {
 };
 
 // RoundMember
-var RoundMember = function(user, is_shared) {
+var RoundMember = function(user) {
 	this.user = user;
-	this.is_shared = is_shared; // bool : Facebook/Google+ user?
 	this.scores = new Array(); // hole.1 - 18
 };
 RoundMember.prototype.set_score = function(hole, score) {
@@ -85,21 +73,21 @@ RoundGroup.prototype.add_round_member = function(round_member) {
 };
 
 // Weather/Wind
-var Weather = {fine:'ê∞ÇÍ', cloudy:'ì‹ÇË', rainy:'âJ'};
-var Wind = {strong:'ã≠Ç¢', weak:'é„Ç¢'};
+var Weather = {fine:'ê∞ÇÍ', cloudy:'ì‹ÇË', rainy:'âJ', snow:'ê·'};
+var Wind = {strong:'ã≠Ç¢', weak:'é„Ç¢', no:'Ç»Çµ'};
 
 // Round
 var Round = function(course, date, weather, wind, first_half, later_half) {
+	this.id = null; // assign on server-side.
 	this.course = course;
 	this.date = date;
 	this.weather = weather;
 	this.wind = wind;
-	this.first_half = first_half; // IN or OUT
-	this.later_half = later_half; // IN or OUT
+	this.first_half = first_half; // IN or OUT or others
+	this.later_half = later_half; // IN or OUT or others
 	
 	this.round_groups = new Array();
 };
 Round.prototype.add_round_group = function(round_group) {
 	this.round_groups.push(round_group);
 }
-
