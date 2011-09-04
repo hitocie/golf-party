@@ -6,6 +6,7 @@ import java.util.List;
 import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;
 
+import com.google.appengine.repackaged.org.json.JSONObject;
 import com.restfb.types.User;
 import com.xhills.golf_party.common.facebook.Me;
 
@@ -29,8 +30,13 @@ public class IndexController extends Controller {
 
                 // service: get_me
                 User user = me.user;
-                writer.write("{name:" + user.getName() + ",id:" + user.getId() + "}");
+                //writer.write("{name:" + user.getName() + ",id:" + user.getId() + "}");
 
+                JSONObject obj = new JSONObject();
+                obj.put("name", user.getName());
+                obj.put("id", user.getId());
+                obj.write(writer);
+                
             } else if (service.equals("get_friends")) {
             
                 // service: get_friends
