@@ -6,6 +6,7 @@ import java.util.List;
 import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;
 
+import com.google.appengine.repackaged.org.json.JSONArray;
 import com.google.appengine.repackaged.org.json.JSONObject;
 import com.restfb.types.User;
 import com.xhills.golf_party.common.facebook.Me;
@@ -30,25 +31,26 @@ public class IndexController extends Controller {
 
                 // service: get_me
                 User user = me.user;
-                //writer.write("{name:" + user.getName() + ",id:" + user.getId() + "}");
-
                 JSONObject obj = new JSONObject();
-                obj.put("name", user.getName());
                 obj.put("id", user.getId());
+                obj.put("name", user.getName());
                 obj.write(writer);
                 
-            } else if (service.equals("get_friends")) {
+            } else if (service.equals("get_my_friends")) {
             
-                // service: get_friends
+                // service: get_my_friends
                 List<User> friends = me.friends;
-                writer.write("{friends:[");
+                JSONArray friendList = new JSONArray();
                 for (int i = 0; i < friends.size(); i++) {
-                    if (i > 0)
-                        writer.write(",");
                     User friend = friends.get(i);
-                    writer.write("{name:" + friend.getName() + ",id:" + friend.getId() + "}");
+                    JSONObject f = new JSONObject();
+                    f.put("id", friend.getId());
+                    f.put("name", friend.getName());
+                    friendList.put(f);
                 }
-                writer.write("]}");
+                JSONObject obj = new JSONObject();
+                obj.put("friends", friendList);
+                obj.write(writer);
             }
         } else {
             
@@ -58,7 +60,9 @@ public class IndexController extends Controller {
                 String accessToken = asString("access_token");
                 sessionScope("me", new Me(accessToken));
                 
-                writer.write("{success:true}");
+                JSONObject obj = new JSONObject();
+                obj.put("success", true);
+                obj.write(writer);
             }
             
         }
