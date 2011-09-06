@@ -23,6 +23,12 @@ $(function() {
 	});	
 });
 
+$(function() {
+	$('#me').click(function() {
+		login();
+		//get_me();
+	});	
+});
 
 $(function() {
 	$('#user-bean').click(function() {

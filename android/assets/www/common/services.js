@@ -1,5 +1,39 @@
 
 // --- Common ---
+var server_url = 'http://192.168.11.2:8888';
+
+function login() {
+	$.ajax({
+		url: server_url + '/me/?service=login' + 'access_token',
+		type: 'GET',
+		//dataType: 'json',
+		cache: false,
+		//contentType: "application/json; charset=utf-8",
+		success: function(data, status){
+			alert("success!" + data);
+		},
+		error: function(data, status){
+			alert("error!! " + JSON.stringify(data));
+		}
+	});
+}
+function get_me() {
+	$.ajax({
+		url: server_url + '/me/?service=get_me',
+		type: 'GET',
+		dataType: 'json',
+		cache: false,
+		//contentType: "application/json; charset=utf-8",
+		success: function(data, status){
+			alert("success!" + data);
+		},
+		error: function(data, status){
+			alert("error!! " + JSON.stringify(data));
+		}
+	});
+}
+
+
 var CRUD = {c:0, r:1, u:2, d:3};
 
 
