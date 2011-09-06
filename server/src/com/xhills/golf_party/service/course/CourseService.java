@@ -32,13 +32,13 @@ public class CourseService {
         
         for (int i = 0; i < halfs.size(); i++) {
             Half half = halfs.get(i);
-            Key key = Datastore.createKey(course.getKey(), HalfMeta.get(), i);
+            Key key = Datastore.createKey(course.getKey(), HalfMeta.get(), i + 1);
             half.setKey(key);
             half.getCourseRef().setModel(course);
             List<Hole> holes = halfHoles.get(i);
             for (int j = 0; j < holes.size(); j++) {
                 Hole hole = holes.get(j);
-                Key holeKey = Datastore.createKey(half.getKey(), HoleMeta.get(), j);
+                Key holeKey = Datastore.createKey(half.getKey(), HoleMeta.get(), j + 1);
                 hole.setKey(holeKey);
                 hole.getHalfRef().setModel(half);
             }
@@ -49,7 +49,8 @@ public class CourseService {
         try {
             Datastore.put(tx, course);
             Datastore.put(tx, halfs);
-            Datastore.put(tx, halfHoles);
+            for (List<Hole> holes : halfHoles)
+                Datastore.put(tx, holes);
             tx.commit();
         }
         catch (Exception e) {
@@ -58,6 +59,26 @@ public class CourseService {
             }
             throw e;
         }
-
+    }
+    
+    public void delete(Course course) throws Exception {
+        
+        Transaction tx = Datastore.beginTransaction();
+        try {
+            for (Half half : course.getHalfRef().getModelList()) {
+                for (Hole hole : half.getHoleRef().getModelList()) { 
+                    Datastore.delete(tx, hole.getKey());
+                }
+                Datastore.delete(tx, half.getKey());
+            }
+            Datastore.delete(tx, course.getKey());
+            tx.commit();
+        }
+        catch (Exception e) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            throw e;
+        }
     }
 }
