@@ -25,8 +25,7 @@ $(function() {
 
 $(function() {
 	$('#me').click(function() {
-		login();
-		//get_me();
+		get_me();
 	});	
 });
 

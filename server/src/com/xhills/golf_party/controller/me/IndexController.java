@@ -13,8 +13,6 @@ import com.xhills.golf_party.common.facebook.Me;
 
 /**
    /me/
-
-   http://locahost:8888/me/?service=xxxx&access_token=175391655867010|a53f95a16a8627ce29b0687a.1-100002000444155|SDBPT15R06N2yRWvVSz9WPzgFgo
  */
 public class IndexController extends Controller {
 
@@ -52,20 +50,8 @@ public class IndexController extends Controller {
                 obj.put("friends", friendList);
                 obj.write(writer);
             }
-        } else {
-            
-            if (service.equals("login")) {
-
-                // service: login
-                String accessToken = asString("access_token");
-                sessionScope("me", new Me(accessToken));
-                
-                JSONObject obj = new JSONObject();
-                obj.put("success", true);
-                obj.write(writer);
-            }
-            
         }
+        
         return null;
     }
 }

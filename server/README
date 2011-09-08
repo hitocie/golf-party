@@ -3,3 +3,8 @@ NOTE:
  - add '--address=ip address' into GAE settings. 
  - change ip address in App.java.
  - change ip address in developers.facebook.com.
+ 
+ 
+[Client]
+ - change ip address in App.java
+ - change ip address in common/services.js

@@ -11,15 +11,14 @@ public class Me implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    
+    public String accessToken;
     public User user;
     public List<User> friends;
 
     public Me(String accessToken) {
-
+        this.accessToken = accessToken;
         FacebookClient client = new DefaultFacebookClient(accessToken);
         user = client.fetchObject("me", User.class);
         friends = client.fetchConnection("me/friends", User.class).getData();
-        
     }
 }

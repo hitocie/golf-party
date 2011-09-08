@@ -1,22 +1,7 @@
 
 // --- Common ---
-var server_url = 'http://192.168.11.2:8888';
+var server_url = 'http://10.10.250.21:8888';
 
-function login() {
-	$.ajax({
-		url: server_url + '/me/?service=login' + 'access_token',
-		type: 'GET',
-		//dataType: 'json',
-		cache: false,
-		//contentType: "application/json; charset=utf-8",
-		success: function(data, status){
-			alert("success!" + data);
-		},
-		error: function(data, status){
-			alert("error!! " + JSON.stringify(data));
-		}
-	});
-}
 function get_me() {
 	$.ajax({
 		url: server_url + '/me/?service=get_me',
@@ -25,7 +10,7 @@ function get_me() {
 		cache: false,
 		//contentType: "application/json; charset=utf-8",
 		success: function(data, status){
-			alert("success!" + data);
+			alert("success!" + JSON.stringify(data));
 		},
 		error: function(data, status){
 			alert("error!! " + JSON.stringify(data));
