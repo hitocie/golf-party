@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.round;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-19 17:09:39")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-20 00:05:19")
 /** */
 public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.round.Round> {
 
@@ -44,6 +44,8 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
         }
         model.getCourseRef().setKey((com.google.appengine.api.datastore.Key) entity.getProperty("courseRef"));
         model.setDate((java.util.Date) entity.getProperty("date"));
+        java.util.List<com.xhills.golf_party.common.course.Half> _halfs = blobToSerializable((com.google.appengine.api.datastore.Blob) entity.getProperty("halfs"));
+        model.setHalfs(_halfs);
         model.setKey(entity.getKey());
         model.setVersion((java.lang.Long) entity.getProperty("version"));
         model.setWeather(stringToEnum(com.xhills.golf_party.common.round.Weather.class, (java.lang.String) entity.getProperty("weather")));
@@ -65,6 +67,7 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
         }
         entity.setProperty("courseRef", m.getCourseRef().getKey());
         entity.setProperty("date", m.getDate());
+        entity.setUnindexedProperty("halfs", serializableToBlob(m.getHalfs()));
         entity.setProperty("version", m.getVersion());
         entity.setProperty("weather", enumToString(m.getWeather()));
         entity.setProperty("wind", enumToString(m.getWind()));
@@ -139,6 +142,10 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
             writer.setNextPropertyName("date");
             encoder0.encode(writer, m.getDate());
         }
+        if(m.getHalfs() != null){
+            writer.setNextPropertyName("halfs");
+            // com.xhills.golf_party.common.course.Half is not supported.
+        }
         if(m.getKey() != null){
             writer.setNextPropertyName("key");
             encoder0.encode(writer, m.getKey());
@@ -171,6 +178,7 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
         decoder0.decode(reader, m.getCourseRef(), maxDepth, currentDepth);
         reader = rootReader.newObjectReader("date");
         m.setDate(decoder0.decode(reader, m.getDate()));
+        reader = rootReader.newObjectReader("halfs");
         reader = rootReader.newObjectReader("key");
         m.setKey(decoder0.decode(reader, m.getKey()));
         reader = rootReader.newObjectReader("roundGroupRef");

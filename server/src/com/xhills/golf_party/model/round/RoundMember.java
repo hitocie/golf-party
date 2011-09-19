@@ -1,14 +1,14 @@
 package com.xhills.golf_party.model.round;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.slim3.datastore.Attribute;
-import org.slim3.datastore.InverseModelListRef;
 import org.slim3.datastore.Model;
 import org.slim3.datastore.ModelRef;
 
 import com.google.appengine.api.datastore.Key;
-import com.xhills.golf_party.meta.round.ScoreMeta;
+import com.xhills.golf_party.common.round.Score;
 import com.xhills.golf_party.model.common.User;
 
 @Model(schemaVersion = 1)
@@ -38,12 +38,20 @@ public class RoundMember implements Serializable {
         return roundGroupRef;
     }
     
-    // Score‚Ö‚Ì1‘Î‘½‚ÌŠÖ˜A 
-    @Attribute(persistent=false)
-    private InverseModelListRef<Score, RoundMember> scoreRef =
-        new InverseModelListRef<Score, RoundMember>(Score.class, ScoreMeta.get().roundMemberRef, this);
-    public InverseModelListRef<Score, RoundMember> getScoreRef() {
-        return scoreRef;
+//    // Score‚Ö‚Ì1‘Î‘½‚ÌŠÖ˜A 
+//    @Attribute(persistent=false)
+//    private InverseModelListRef<Score, RoundMember> scoreRef =
+//        new InverseModelListRef<Score, RoundMember>(Score.class, ScoreMeta.get().roundMemberRef, this);
+//    public InverseModelListRef<Score, RoundMember> getScoreRef() {
+//        return scoreRef;
+//    }
+    @Attribute(lob=true)
+    private List<Score> scores;
+    public List<Score> getScores() {
+        return scores;
+    }
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
     }
     //------------------------
     

@@ -2,6 +2,7 @@ package com.xhills.golf_party.model.round;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.InverseModelListRef;
@@ -9,6 +10,7 @@ import org.slim3.datastore.Model;
 import org.slim3.datastore.ModelRef;
 
 import com.google.appengine.api.datastore.Key;
+import com.xhills.golf_party.common.course.Half;
 import com.xhills.golf_party.common.round.Weather;
 import com.xhills.golf_party.common.round.Wind;
 import com.xhills.golf_party.meta.round.RoundGroupMeta;
@@ -67,7 +69,15 @@ public class Round implements Serializable {
 //    public ModelRef<Half> getLastHalfRef() {
 //        return lastHalfRef;
 //    }
-//    
+    @Attribute(lob=true)
+    private List<Half> halfs;
+    public List<Half> getHalfs() {
+        return halfs;
+    }
+    public void setHalfs(List<Half> halfs) {
+        this.halfs = halfs;
+    }
+    
     // RoundGroup‚Ö‚Ì1‘Î‘½‚ÌŠÖ˜A 
     @Attribute(persistent=false)
     private InverseModelListRef<RoundGroup, Round> roundGroupRef =

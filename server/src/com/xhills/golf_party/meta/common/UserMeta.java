@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.common;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-19 14:58:44")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-19 23:23:34")
 /** */
 public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.common.User> {
 

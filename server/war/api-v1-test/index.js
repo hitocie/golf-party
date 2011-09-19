@@ -85,3 +85,23 @@ $(function() {
 });
 
 
+$(function() {
+	$('#round').click(function() {
+		var round = {
+				course: 'ABC country club',
+				date: '2011-10-10 09:00:00',
+				first_half: 'OUT',
+				last_half: 'IN',
+				// wind, weather
+				groups: [
+				         [{id: '100000', scores: null}, {id: '200000', scores: null}],
+				         [{id: '300000', scores: null}, {id: '400000', scores: null}]
+				         ]
+		};
+		create_round(round, function(round) {
+			console.log('course=' + round.course);
+		});
+	});	
+});
+
+

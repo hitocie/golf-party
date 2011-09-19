@@ -16,6 +16,13 @@ public class CourseService {
         CourseMeta m = CourseMeta.get();
         return Datastore.query(m).sort(m.name.desc).asList();
     }
+    
+    public Course getCourse(String name) {
+        CourseMeta m = CourseMeta.get();
+        return Datastore.query(m)
+                .filter(m.name.equal(name))
+                .asSingle();
+    }
 
     public Course createCourse(Course course) throws Exception {
         

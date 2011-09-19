@@ -60,3 +60,16 @@ function create_course(course, p) {
 			type: 'POST'
 	});
 }
+
+// round
+function create_round(round, p) {
+	async_request({
+		url: '/api/v1/round/update', 
+		success_handler: function(data, status) {
+			//alert(JSON.stringify(data));
+			p(data);
+		},
+		data: JSON.stringify(round),
+		type: 'POST'
+	});
+}

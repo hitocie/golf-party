@@ -1,5 +1,6 @@
 package com.xhills.golf_party.service.round;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slim3.datastore.Datastore;
@@ -9,11 +10,9 @@ import com.google.appengine.api.datastore.Transaction;
 import com.xhills.golf_party.meta.round.RoundGroupMeta;
 import com.xhills.golf_party.meta.round.RoundMemberMeta;
 import com.xhills.golf_party.meta.round.RoundMeta;
-import com.xhills.golf_party.meta.round.ScoreMeta;
 import com.xhills.golf_party.model.round.Round;
 import com.xhills.golf_party.model.round.RoundGroup;
 import com.xhills.golf_party.model.round.RoundMember;
-import com.xhills.golf_party.model.round.Score;
 
 
 public class RoundService {
@@ -23,8 +22,46 @@ public class RoundService {
         return Datastore.query(m).sort(m.date.desc).asList();
     }
     
-    
-    public void insert(
+    public Round createRound(Round round) throws Exception {
+        
+        round.setKey(Datastore.allocateId(RoundMeta.get()));
+        
+        List<RoundGroup> roundGroups = round.getRoundGroupRef().getModelList();
+        List<List<RoundMember>> roundMembers = new ArrayList<List<RoundMember>>();
+        for (int i = 0; i < roundGroups.size(); i++) {
+            RoundGroup rg = roundGroups.get(i);
+            Key key = Datastore.createKey(round.getKey(), RoundGroupMeta.get(), i + 1);
+            rg.setKey(key);
+            //rg.getRoundRef().setModel(round);
+            List<RoundMember> rms = rg.getRoundMemberRef().getModelList(); 
+            for (int j = 0; j < rms.size(); j++) {
+                RoundMember rm = rms.get(j);
+                Key rmKey = Datastore.createKey(rg.getKey(), RoundMemberMeta.get(), j + 1);
+                rm.setKey(rmKey);
+                //rm.getRoundGroupRef().setModel(rg);
+            }
+            roundMembers.add(rms);
+        }
+        
+        Transaction tx = Datastore.beginTransaction();
+        try {
+            Datastore.put(tx, round);
+            Datastore.put(tx, roundGroups);
+            for (List<RoundMember> rms : roundMembers)
+                Datastore.put(tx, rms);
+            tx.commit();
+        }
+        catch (Exception e) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            throw e;
+        }
+        return round;
+    }
+
+    /*
+    public void createRound(
             Round round,
             List<RoundGroup> roundGroups,
             List<List<RoundMember>> roundMembers,
@@ -73,5 +110,5 @@ public class RoundService {
             }
             throw e;
         }
-    }
+    }*/
 }

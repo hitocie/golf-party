@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.round;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-19 14:58:44")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-20 00:39:13")
 /** */
 public final class RoundMemberMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.round.RoundMember> {
 
@@ -38,6 +38,8 @@ public final class RoundMemberMeta extends org.slim3.datastore.ModelMeta<com.xhi
             throw new NullPointerException("The property(roundGroupRef) is null.");
         }
         model.getRoundGroupRef().setKey((com.google.appengine.api.datastore.Key) entity.getProperty("roundGroupRef"));
+        java.util.List<com.xhills.golf_party.common.round.Score> _scores = blobToSerializable((com.google.appengine.api.datastore.Blob) entity.getProperty("scores"));
+        model.setScores(_scores);
         if (model.getUserRef() == null) {
             throw new NullPointerException("The property(userRef) is null.");
         }
@@ -59,6 +61,7 @@ public final class RoundMemberMeta extends org.slim3.datastore.ModelMeta<com.xhi
             throw new NullPointerException("The property(roundGroupRef) must not be null.");
         }
         entity.setProperty("roundGroupRef", m.getRoundGroupRef().getKey());
+        entity.setUnindexedProperty("scores", serializableToBlob(m.getScores()));
         if (m.getUserRef() == null) {
             throw new NullPointerException("The property(userRef) must not be null.");
         }
@@ -139,9 +142,9 @@ public final class RoundMemberMeta extends org.slim3.datastore.ModelMeta<com.xhi
             writer.setNextPropertyName("roundGroupRef");
             encoder0.encode(writer, m.getRoundGroupRef(), maxDepth, currentDepth);
         }
-        if(m.getScoreRef() != null){
-            writer.setNextPropertyName("scoreRef");
-            encoder0.encode(writer, m.getScoreRef());
+        if(m.getScores() != null){
+            writer.setNextPropertyName("scores");
+            // com.xhills.golf_party.common.round.Score is not supported.
         }
         if(m.getUserRef() != null && m.getUserRef().getKey() != null){
             writer.setNextPropertyName("userRef");
@@ -163,7 +166,7 @@ public final class RoundMemberMeta extends org.slim3.datastore.ModelMeta<com.xhi
         m.setKey(decoder0.decode(reader, m.getKey()));
         reader = rootReader.newObjectReader("roundGroupRef");
         decoder0.decode(reader, m.getRoundGroupRef(), maxDepth, currentDepth);
-        reader = rootReader.newObjectReader("scoreRef");
+        reader = rootReader.newObjectReader("scores");
         reader = rootReader.newObjectReader("userRef");
         decoder0.decode(reader, m.getUserRef(), maxDepth, currentDepth);
         reader = rootReader.newObjectReader("version");
