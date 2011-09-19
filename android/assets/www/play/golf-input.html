@@ -9,7 +9,7 @@
 	<div data-role="page">
 
 		<script src="golf-input.js"></script>
-		
+
 		<!-- header -->
 		<div data-role="header">
 		<a href="#" data-icon="back" data-rel="back">戻る</a>
@@ -20,8 +20,8 @@
 		<div data-role="content">
 			<p>大平台カントリークラブ</p>
 			<div data-role="fieldcontain">
-				<label for="name">日付</label>
-				<input type="text" name="name" id="name" value=""  />
+				<label for="playdate">日付</label>
+				<input name="playdate" id="playdate" type="date" data-role="datebox"  data-options='{"mode": "calbox"'>
 			</div>
 			<div data-role="fieldcontain">
 				<label for="select-choice-1" class="select">天候</label>
@@ -33,11 +33,67 @@
 					</select>
 			</div>
 			<div data-role="fieldcontain">
-				<label for="select-choice-1" class="select">風</label>
+				<label for="select-choice-2" class="select">風</label>
 					<select name="select-choice-2" id="select-choice-2">
 						<option value="1">なし</option>
 						<option value="2">強風</option>
 					</select>
+			</div>
+			<div data-role="fieldcontain">
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a">
+						<label for="user1">メンバ</label>
+					</div>
+					<div class="ui-block-b">
+						<a id ="user-add-button" data-role="button" data-icon="plus" data-iconpos="notext">ボタン</a>
+					</div>
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain">
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a">
+						<label for="name">グループ</label>
+					</div>
+					<div class="ui-block-b">
+						<a data-role="button" data-icon="plus" data-iconpos="notext">ボタン</a>
+					</div>
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain">
+				<div class="ui-grid-b">
+					<div class="ui-block-a">
+						<label for="name">コース</label>
+					</div>
+					<div class="ui-block-b">
+						<label for="name">前半</label>
+					</div>
+					<div class="ui-block-c">
+						<label for="name">後半</label>
+					</div>
+					<div class="ui-block-a">
+						<label for="name">IN</label>
+					</div>
+					<div class="ui-block-b">
+						<input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
+					</div>
+					<div class="ui-block-c">
+						<input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-1" />
+					</div>
+					<div class="ui-block-a">
+						<label for="name">OUT</label>
+					</div>
+					<div class="ui-block-b">
+						<input type="radio" name="radio-choice-2" id="radio-choice-3" value="choice-2" />
+					</div>
+					<div class="ui-block-c">
+						<input type="radio" name="radio-choice-2" id="radio-choice-4" value="choice-2" checked="checked" />
+					</div>
+				</div>
+
+
+			</div>
+			<div data-role="fieldcontain">
+				<a data-role="button" >プレー</a>
 			</div>
 		</div>
 
