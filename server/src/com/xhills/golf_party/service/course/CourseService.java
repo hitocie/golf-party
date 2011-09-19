@@ -5,14 +5,9 @@ import java.util.List;
 
 import org.slim3.datastore.Datastore;
 
-import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Transaction;
 import com.xhills.golf_party.meta.course.CourseMeta;
-import com.xhills.golf_party.meta.course.HalfMeta;
-import com.xhills.golf_party.meta.course.HoleMeta;
 import com.xhills.golf_party.model.course.Course;
-import com.xhills.golf_party.model.course.Half;
-import com.xhills.golf_party.model.course.Hole;
 
 
 public class CourseService {
@@ -22,7 +17,27 @@ public class CourseService {
         return Datastore.query(m).sort(m.name.desc).asList();
     }
 
-    public void insert(
+    public Course createCourse(Course course) throws Exception {
+        
+        course.setKey(Datastore.allocateId(CourseMeta.get()));
+        course.setTimestamp((new Date()).getTime());
+        
+        Transaction tx = Datastore.beginTransaction();
+        try {
+            Datastore.put(tx, course);
+            tx.commit();
+        }
+        catch (Exception e) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            throw e;
+        }
+        return course;
+    }
+    
+    /*
+    public void createCourse(
             Course course,
             List<Half> halfs,
             List<List<Hole>> halfHoles) throws Exception {
@@ -61,7 +76,8 @@ public class CourseService {
         }
     }
     
-    public void delete(Course course) throws Exception {
+    
+    public void deleteCourse(Course course) throws Exception {
         
         Transaction tx = Datastore.beginTransaction();
         try {
@@ -81,4 +97,5 @@ public class CourseService {
             throw e;
         }
     }
+    */
 }

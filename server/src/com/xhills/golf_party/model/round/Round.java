@@ -9,11 +9,10 @@ import org.slim3.datastore.Model;
 import org.slim3.datastore.ModelRef;
 
 import com.google.appengine.api.datastore.Key;
-import com.xhills.golf_party.common.course.Weather;
-import com.xhills.golf_party.common.course.Wind;
+import com.xhills.golf_party.common.round.Weather;
+import com.xhills.golf_party.common.round.Wind;
 import com.xhills.golf_party.meta.round.RoundGroupMeta;
 import com.xhills.golf_party.model.course.Course;
-import com.xhills.golf_party.model.course.Half;
 
 @Model(schemaVersion = 1)
 public class Round implements Serializable {
@@ -59,16 +58,16 @@ public class Round implements Serializable {
         this.wind = wind;
     }
 
-    // IN or OUT ...
-    private ModelRef<Half> firstHalfRef = new ModelRef<Half>(Half.class);
-    public ModelRef<Half> getFirstHalfRef() {
-        return firstHalfRef;
-    }
-    private ModelRef<Half> lastHalfRef = new ModelRef<Half>(Half.class);
-    public ModelRef<Half> getLastHalfRef() {
-        return lastHalfRef;
-    }
-    
+//    // IN or OUT ...
+//    private ModelRef<Half> firstHalfRef = new ModelRef<Half>(Half.class);
+//    public ModelRef<Half> getFirstHalfRef() {
+//        return firstHalfRef;
+//    }
+//    private ModelRef<Half> lastHalfRef = new ModelRef<Half>(Half.class);
+//    public ModelRef<Half> getLastHalfRef() {
+//        return lastHalfRef;
+//    }
+//    
     // RoundGroup‚Ö‚Ì1‘Î‘½‚ÌŠÖ˜A 
     @Attribute(persistent=false)
     private InverseModelListRef<RoundGroup, Round> roundGroupRef =

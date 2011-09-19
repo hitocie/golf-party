@@ -6,6 +6,6 @@ public class App {
     
     public static String appSecret = "a3589ea2a8facf7d9fbdd7f76c3adbe3";
     
-    public static String siteUrl = "http://10.10.250.21:8888/auth/";
+    public static String siteUrl = "http://localhost:8888/auth/";
     
 }

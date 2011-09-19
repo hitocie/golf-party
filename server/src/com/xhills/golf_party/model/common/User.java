@@ -2,10 +2,12 @@ package com.xhills.golf_party.model.common;
 
 import java.io.Serializable;
 
-import com.google.appengine.api.datastore.Key;
-
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.Model;
+
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
 
 @Model(schemaVersion = 1)
 public class User implements Serializable {
@@ -22,6 +24,14 @@ public class User implements Serializable {
     //--------------------------
     
     // facebook ID or Google+ ID
+    private String token;
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
+    }
+    
     private String id; 
     public String getId() {
         return id;
@@ -106,5 +116,13 @@ public class User implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    
+    public JSONObject toJSONObject() throws JSONException {
+        return new JSONObject()
+        .put("id", id)
+        .put("name", name)
+        .put("token", token);
     }
 }

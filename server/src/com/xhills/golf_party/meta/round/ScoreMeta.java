@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.round;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-06 23:47:20")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-16 15:15:55")
 /** */
 public final class ScoreMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.round.Score> {
 

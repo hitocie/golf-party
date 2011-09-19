@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.round;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-06 23:47:19")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-19 17:09:39")
 /** */
 public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.round.Round> {
 
@@ -11,22 +11,16 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
     public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, java.util.Date> date = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, java.util.Date>(this, "date", "date", java.util.Date.class);
 
     /** */
-    public final org.slim3.datastore.ModelRefAttributeMeta<com.xhills.golf_party.model.round.Round, org.slim3.datastore.ModelRef<com.xhills.golf_party.model.course.Half>, com.xhills.golf_party.model.course.Half> firstHalfRef = new org.slim3.datastore.ModelRefAttributeMeta<com.xhills.golf_party.model.round.Round, org.slim3.datastore.ModelRef<com.xhills.golf_party.model.course.Half>, com.xhills.golf_party.model.course.Half>(this, "firstHalfRef", "firstHalfRef", org.slim3.datastore.ModelRef.class, com.xhills.golf_party.model.course.Half.class);
-
-    /** */
     public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.google.appengine.api.datastore.Key> key = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.google.appengine.api.datastore.Key>(this, "__key__", "key", com.google.appengine.api.datastore.Key.class);
-
-    /** */
-    public final org.slim3.datastore.ModelRefAttributeMeta<com.xhills.golf_party.model.round.Round, org.slim3.datastore.ModelRef<com.xhills.golf_party.model.course.Half>, com.xhills.golf_party.model.course.Half> lastHalfRef = new org.slim3.datastore.ModelRefAttributeMeta<com.xhills.golf_party.model.round.Round, org.slim3.datastore.ModelRef<com.xhills.golf_party.model.course.Half>, com.xhills.golf_party.model.course.Half>(this, "lastHalfRef", "lastHalfRef", org.slim3.datastore.ModelRef.class, com.xhills.golf_party.model.course.Half.class);
 
     /** */
     public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, java.lang.Long> version = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, java.lang.Long>(this, "version", "version", java.lang.Long.class);
 
     /** */
-    public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.xhills.golf_party.common.course.Weather> weather = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.xhills.golf_party.common.course.Weather>(this, "weather", "weather", com.xhills.golf_party.common.course.Weather.class);
+    public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.xhills.golf_party.common.round.Weather> weather = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.xhills.golf_party.common.round.Weather>(this, "weather", "weather", com.xhills.golf_party.common.round.Weather.class);
 
     /** */
-    public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.xhills.golf_party.common.course.Wind> wind = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.xhills.golf_party.common.course.Wind>(this, "wind", "wind", com.xhills.golf_party.common.course.Wind.class);
+    public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.xhills.golf_party.common.round.Wind> wind = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.xhills.golf_party.common.round.Wind>(this, "wind", "wind", com.xhills.golf_party.common.round.Wind.class);
 
     private static final RoundMeta slim3_singleton = new RoundMeta();
 
@@ -50,18 +44,10 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
         }
         model.getCourseRef().setKey((com.google.appengine.api.datastore.Key) entity.getProperty("courseRef"));
         model.setDate((java.util.Date) entity.getProperty("date"));
-        if (model.getFirstHalfRef() == null) {
-            throw new NullPointerException("The property(firstHalfRef) is null.");
-        }
-        model.getFirstHalfRef().setKey((com.google.appengine.api.datastore.Key) entity.getProperty("firstHalfRef"));
         model.setKey(entity.getKey());
-        if (model.getLastHalfRef() == null) {
-            throw new NullPointerException("The property(lastHalfRef) is null.");
-        }
-        model.getLastHalfRef().setKey((com.google.appengine.api.datastore.Key) entity.getProperty("lastHalfRef"));
         model.setVersion((java.lang.Long) entity.getProperty("version"));
-        model.setWeather(stringToEnum(com.xhills.golf_party.common.course.Weather.class, (java.lang.String) entity.getProperty("weather")));
-        model.setWind(stringToEnum(com.xhills.golf_party.common.course.Wind.class, (java.lang.String) entity.getProperty("wind")));
+        model.setWeather(stringToEnum(com.xhills.golf_party.common.round.Weather.class, (java.lang.String) entity.getProperty("weather")));
+        model.setWind(stringToEnum(com.xhills.golf_party.common.round.Wind.class, (java.lang.String) entity.getProperty("wind")));
         return model;
     }
 
@@ -79,14 +65,6 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
         }
         entity.setProperty("courseRef", m.getCourseRef().getKey());
         entity.setProperty("date", m.getDate());
-        if (m.getFirstHalfRef() == null) {
-            throw new NullPointerException("The property(firstHalfRef) must not be null.");
-        }
-        entity.setProperty("firstHalfRef", m.getFirstHalfRef().getKey());
-        if (m.getLastHalfRef() == null) {
-            throw new NullPointerException("The property(lastHalfRef) must not be null.");
-        }
-        entity.setProperty("lastHalfRef", m.getLastHalfRef().getKey());
         entity.setProperty("version", m.getVersion());
         entity.setProperty("weather", enumToString(m.getWeather()));
         entity.setProperty("wind", enumToString(m.getWind()));
@@ -120,14 +98,6 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
             throw new NullPointerException("The property(courseRef) must not be null.");
         }
         m.getCourseRef().assignKeyIfNecessary(ds);
-        if (m.getFirstHalfRef() == null) {
-            throw new NullPointerException("The property(firstHalfRef) must not be null.");
-        }
-        m.getFirstHalfRef().assignKeyIfNecessary(ds);
-        if (m.getLastHalfRef() == null) {
-            throw new NullPointerException("The property(lastHalfRef) must not be null.");
-        }
-        m.getLastHalfRef().assignKeyIfNecessary(ds);
     }
 
     @Override
@@ -169,17 +139,9 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
             writer.setNextPropertyName("date");
             encoder0.encode(writer, m.getDate());
         }
-        if(m.getFirstHalfRef() != null && m.getFirstHalfRef().getKey() != null){
-            writer.setNextPropertyName("firstHalfRef");
-            encoder0.encode(writer, m.getFirstHalfRef(), maxDepth, currentDepth);
-        }
         if(m.getKey() != null){
             writer.setNextPropertyName("key");
             encoder0.encode(writer, m.getKey());
-        }
-        if(m.getLastHalfRef() != null && m.getLastHalfRef().getKey() != null){
-            writer.setNextPropertyName("lastHalfRef");
-            encoder0.encode(writer, m.getLastHalfRef(), maxDepth, currentDepth);
         }
         if(m.getRoundGroupRef() != null){
             writer.setNextPropertyName("roundGroupRef");
@@ -209,19 +171,15 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
         decoder0.decode(reader, m.getCourseRef(), maxDepth, currentDepth);
         reader = rootReader.newObjectReader("date");
         m.setDate(decoder0.decode(reader, m.getDate()));
-        reader = rootReader.newObjectReader("firstHalfRef");
-        decoder0.decode(reader, m.getFirstHalfRef(), maxDepth, currentDepth);
         reader = rootReader.newObjectReader("key");
         m.setKey(decoder0.decode(reader, m.getKey()));
-        reader = rootReader.newObjectReader("lastHalfRef");
-        decoder0.decode(reader, m.getLastHalfRef(), maxDepth, currentDepth);
         reader = rootReader.newObjectReader("roundGroupRef");
         reader = rootReader.newObjectReader("version");
         m.setVersion(decoder0.decode(reader, m.getVersion()));
         reader = rootReader.newObjectReader("weather");
-        m.setWeather(decoder0.decode(reader, m.getWeather(), com.xhills.golf_party.common.course.Weather.class));
+        m.setWeather(decoder0.decode(reader, m.getWeather(), com.xhills.golf_party.common.round.Weather.class));
         reader = rootReader.newObjectReader("wind");
-        m.setWind(decoder0.decode(reader, m.getWind(), com.xhills.golf_party.common.course.Wind.class));
+        m.setWind(decoder0.decode(reader, m.getWind(), com.xhills.golf_party.common.round.Wind.class));
         return m;
     }
 }

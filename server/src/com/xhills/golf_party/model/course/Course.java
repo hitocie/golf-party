@@ -1,13 +1,15 @@
 package com.xhills.golf_party.model.course;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.slim3.datastore.Attribute;
-import org.slim3.datastore.InverseModelListRef;
 import org.slim3.datastore.Model;
 
 import com.google.appengine.api.datastore.Key;
-import com.xhills.golf_party.meta.course.HalfMeta;
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
+import com.xhills.golf_party.common.course.Half;
 
 @Model(schemaVersion = 1)
 public class Course implements Serializable {
@@ -29,6 +31,7 @@ public class Course implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    
     private String address;
     public String getAddress() {
         return address;
@@ -36,6 +39,7 @@ public class Course implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+    
     private long timestamp;
     public long getTimestamp() {
         return timestamp;
@@ -43,12 +47,14 @@ public class Course implements Serializable {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
-    // Half‚Ö‚Ì1‘Î‘½‚ÌŠÖ˜A 
-    @Attribute(persistent=false)
-    private InverseModelListRef<Half, Course> halfRef =
-        new InverseModelListRef<Half, Course>(Half.class, HalfMeta.get().courseRef, this);
-    public InverseModelListRef<Half, Course> getHalfRef() {
-        return halfRef;
+    
+    @Attribute(lob=true)
+    private List<Half> halfs;
+    public List<Half> getHalfs() {
+        return halfs;
+    }
+    public void setHalfs(List<Half> halfs) {
+        this.halfs = halfs;
     }
     /*-------------------------------------*/
 
@@ -121,5 +127,13 @@ public class Course implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    
+    public JSONObject toJSONObject() throws JSONException {
+        // TODO:
+        return new JSONObject()
+        .put("name", name)
+        .put("address", address);
     }
 }

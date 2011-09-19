@@ -15,8 +15,15 @@ public class UserService {
         UserMeta m = UserMeta.get();
         return Datastore.query(m).sort(m.name.desc).asList();
     }
+    
+    public User getUser(String id) {
+        UserMeta m = UserMeta.get();
+        return Datastore.query(m)
+                .filter(m.id.equal(id))
+                .asSingle();
+    }
 
-    public void insert(User user) throws Exception {
+    public User createUser(User user) throws Exception {
         
         user.setKey(Datastore.allocateId(UserMeta.get()));
         
@@ -31,5 +38,6 @@ public class UserService {
             }
             throw e;
         }
+        return user;
     }
 }

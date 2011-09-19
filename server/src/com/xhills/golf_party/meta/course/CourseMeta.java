@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.course;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-06 23:47:20")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-19 17:10:17")
 /** */
 public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.course.Course> {
 
@@ -37,6 +37,8 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
     public com.xhills.golf_party.model.course.Course entityToModel(com.google.appengine.api.datastore.Entity entity) {
         com.xhills.golf_party.model.course.Course model = new com.xhills.golf_party.model.course.Course();
         model.setAddress((java.lang.String) entity.getProperty("address"));
+        java.util.List<com.xhills.golf_party.common.course.Half> _halfs = blobToSerializable((com.google.appengine.api.datastore.Blob) entity.getProperty("halfs"));
+        model.setHalfs(_halfs);
         model.setKey(entity.getKey());
         model.setName((java.lang.String) entity.getProperty("name"));
         model.setTimestamp(longToPrimitiveLong((java.lang.Long) entity.getProperty("timestamp")));
@@ -54,6 +56,7 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
             entity = new com.google.appengine.api.datastore.Entity(kind);
         }
         entity.setProperty("address", m.getAddress());
+        entity.setUnindexedProperty("halfs", serializableToBlob(m.getHalfs()));
         entity.setProperty("name", m.getName());
         entity.setProperty("timestamp", m.getTimestamp());
         entity.setProperty("version", m.getVersion());
@@ -119,9 +122,9 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
             writer.setNextPropertyName("address");
             encoder0.encode(writer, m.getAddress());
         }
-        if(m.getHalfRef() != null){
-            writer.setNextPropertyName("halfRef");
-            encoder0.encode(writer, m.getHalfRef());
+        if(m.getHalfs() != null){
+            writer.setNextPropertyName("halfs");
+            // com.xhills.golf_party.common.course.Half is not supported.
         }
         if(m.getKey() != null){
             writer.setNextPropertyName("key");
@@ -147,7 +150,7 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
         org.slim3.datastore.json.Default decoder0 = new org.slim3.datastore.json.Default();
         reader = rootReader.newObjectReader("address");
         m.setAddress(decoder0.decode(reader, m.getAddress()));
-        reader = rootReader.newObjectReader("halfRef");
+        reader = rootReader.newObjectReader("halfs");
         reader = rootReader.newObjectReader("key");
         m.setKey(decoder0.decode(reader, m.getKey()));
         reader = rootReader.newObjectReader("name");
