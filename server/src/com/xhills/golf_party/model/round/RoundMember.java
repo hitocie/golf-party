@@ -8,6 +8,9 @@ import org.slim3.datastore.Model;
 import org.slim3.datastore.ModelRef;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.repackaged.org.json.JSONArray;
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
 import com.xhills.golf_party.common.round.Score;
 import com.xhills.golf_party.model.common.User;
 
@@ -121,5 +124,16 @@ public class RoundMember implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    public JSONObject toJSONObject() throws JSONException {
+        JSONArray scores = new JSONArray();
+        if (getScores() != null) {
+            for (Score s : getScores()) 
+                scores.put(s.toJSONObject());
+        }            
+        return new JSONObject()
+        .put("user", userRef.getModel().toJSONObject())
+        .put("scores", scores);
     }
 }

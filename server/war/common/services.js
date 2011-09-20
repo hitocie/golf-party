@@ -17,12 +17,35 @@ function async_request(args) {
 		url: url,
 		data: data,
 		type: type,
+		async: true,
 		dataType: 'json',
 		cache: false,
 		contentType: 'application/json; charset=utf-8',
 		success: success_handler,
 		error: error_handler
 	});
+}
+function sync_request(args) {
+	var url = args.url;
+	//var success_handler = args.success_handler;
+	var data = args.data;
+	var type = args.type;
+	if (type == undefined)
+		type = 'GET';
+	
+	var response = $.ajax({
+		url: url,
+		data: data,
+		type: type,
+		async: false,
+		dataType: 'json',
+		cache: false,
+		contentType: 'application/json; charset=utf-8'//,
+		//success: success_handler,
+		//error: error_handler
+	}).responseText;
+	
+	return response;
 }
 
 
@@ -62,14 +85,11 @@ function create_course(course, p) {
 }
 
 // round
-function create_round(round, p) {
-	async_request({
+function create_round(round) {
+	var response = sync_request({
 		url: '/api/v1/round/update', 
-		success_handler: function(data, status) {
-			//alert(JSON.stringify(data));
-			p(data);
-		},
 		data: JSON.stringify(round),
 		type: 'POST'
 	});
+	return response;
 }

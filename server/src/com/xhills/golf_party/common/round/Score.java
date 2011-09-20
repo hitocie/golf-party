@@ -2,6 +2,9 @@ package com.xhills.golf_party.common.round;
 
 import java.io.Serializable;
 
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
+
 public class Score implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,4 +32,9 @@ public class Score implements Serializable {
     // beach; // bool
     // penalty; // bool
 
+    public JSONObject toJSONObject() throws JSONException {
+        return new JSONObject()
+        .put("score", score)
+        .put("putter", putter);
+    }
 }

@@ -98,9 +98,9 @@ $(function() {
 				         [{id: '300000', scores: null}, {id: '400000', scores: null}]
 				         ]
 		};
-		create_round(round, function(round) {
-			console.log('course=' + round.course);
-		});
+		round = create_round(round);
+		alert(round);
+
 	});	
 });
 

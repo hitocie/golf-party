@@ -22,12 +22,11 @@ public class UpdateController extends Controller {
     @Override
     public Navigation run() throws Exception {
         
-        String service = request.getMethod(); 
-        if (service != null) {
+        if (!isGet()) {
             
             Me me = (Me) sessionScope("me");
             if (me != null) {
-                if (service.equals("POST")) {
+                if (isPost()) {
                     // create
                     JSONObject obj = 
                             Util.inputStreamToJSONObject(request.getInputStream());
@@ -60,7 +59,7 @@ public class UpdateController extends Controller {
                     course.toJSONObject().write(response.getWriter());
                     
                     return null;
-                } else if (service.equals("DELETE")) {
+                } else if (isDelete()) {
                     // TODO:
                     
                 }

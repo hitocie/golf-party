@@ -28,12 +28,11 @@ public class UpdateController extends Controller {
     @Override
     public Navigation run() throws Exception {
         
-        String service = request.getMethod();
-        if (service != null) {
+        if (!isGet()) {
             
             Me me = (Me) sessionScope("me");
             if (me != null) {
-                if (service.equals("POST")) {
+                if (isPost()) {
                     // create
                     JSONObject obj = 
                             Util.inputStreamToJSONObject(request.getInputStream());
@@ -75,6 +74,10 @@ public class UpdateController extends Controller {
                     RoundService rs = new RoundService();
                     round = rs.createRound(round);
                     log.info("Created new round. " + round.getCourseRef().getModel().getName());
+                
+                    round.toJSONObject().write(response.getWriter());
+                    
+                    return null;
                 }
             }
         }

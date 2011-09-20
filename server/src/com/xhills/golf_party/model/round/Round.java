@@ -10,6 +10,9 @@ import org.slim3.datastore.Model;
 import org.slim3.datastore.ModelRef;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.repackaged.org.json.JSONArray;
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
 import com.xhills.golf_party.common.course.Half;
 import com.xhills.golf_party.common.round.Weather;
 import com.xhills.golf_party.common.round.Wind;
@@ -154,5 +157,18 @@ public class Round implements Serializable {
             return false;
         }
         return true;
+    }
+    
+
+    public JSONObject toJSONObject() throws JSONException {
+        JSONArray roundGroups = new JSONArray();
+        for (RoundGroup rg : roundGroupRef.getModelList()) {
+            roundGroups.put(rg.toJSONObject());
+        }
+
+        return new JSONObject()
+        .put("course", courseRef.getModel().getName())
+        .put("date", date)
+        .put("groups", roundGroups);
     }
 }
