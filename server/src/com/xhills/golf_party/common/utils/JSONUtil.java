@@ -1,14 +1,13 @@
-package com.xhills.golf_party.common;
+package com.xhills.golf_party.common.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import com.google.appengine.repackaged.org.json.JSONException;
 import com.google.appengine.repackaged.org.json.JSONObject;
 
-public class Util {
+public class JSONUtil {
+
 
     public static JSONObject inputStreamToJSONObject(InputStream in) throws JSONException, IOException {
         StringBuffer buf = new StringBuffer();
@@ -17,14 +16,6 @@ public class Util {
             buf.append((char) ch);
         }
         in.close();
-        JSONObject obj = new JSONObject(buf.toString());
-        return obj;
+        return new JSONObject(buf.toString());
     }
-    
-    public static String dateToString(Date date) {
-        if (date == null)
-            return null;
-        return (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date);
-    }
-
 }

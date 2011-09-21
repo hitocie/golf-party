@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.Model;
+import org.slim3.util.DateUtil;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.repackaged.org.json.JSONArray;
 import com.google.appengine.repackaged.org.json.JSONException;
 import com.google.appengine.repackaged.org.json.JSONObject;
 import com.xhills.golf_party.common.course.Half;
@@ -131,9 +133,15 @@ public class Course implements Serializable {
     
     
     public JSONObject toJSONObject() throws JSONException {
+        JSONArray halfs = new JSONArray();
+        for (Half h : getHalfs()) {
+            halfs.put(h.toJSONObject());
+        }
         // TODO:
         return new JSONObject()
         .put("name", name)
-        .put("address", address);
+        .put("address", address)
+        .put("timestamp", DateUtil.toString(timestamp))
+        .put("halfs", halfs);
     }
 }

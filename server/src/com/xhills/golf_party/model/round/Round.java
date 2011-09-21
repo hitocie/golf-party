@@ -8,6 +8,7 @@ import org.slim3.datastore.Attribute;
 import org.slim3.datastore.InverseModelListRef;
 import org.slim3.datastore.Model;
 import org.slim3.datastore.ModelRef;
+import org.slim3.util.DateUtil;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.repackaged.org.json.JSONArray;
@@ -88,6 +89,14 @@ public class Round implements Serializable {
     public InverseModelListRef<RoundGroup, Round> getRoundGroupRef() {
         return roundGroupRef;
     }
+
+    private Date timestamp;
+    public Date getTimestamp() {
+        return timestamp;
+    }
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
     //------------------------------
     
     
@@ -162,13 +171,15 @@ public class Round implements Serializable {
 
     public JSONObject toJSONObject() throws JSONException {
         JSONArray roundGroups = new JSONArray();
-        for (RoundGroup rg : roundGroupRef.getModelList()) {
+        for (RoundGroup rg : roundGroupRef.getModelList()) 
             roundGroups.put(rg.toJSONObject());
-        }
 
         return new JSONObject()
         .put("course", courseRef.getModel().getName())
-        .put("date", date)
-        .put("groups", roundGroups);
+        .put("date", DateUtil.toString(date))
+        .put("weather", weather)
+        .put("wind", wind)
+        .put("groups", roundGroups)
+        .put("timestamp", DateUtil.toString(timestamp));
     }
 }

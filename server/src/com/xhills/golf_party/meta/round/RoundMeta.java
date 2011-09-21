@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.round;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-20 22:59:46")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-21 11:14:32")
 /** */
 public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.round.Round> {
 
@@ -12,6 +12,9 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
 
     /** */
     public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.google.appengine.api.datastore.Key> key = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, com.google.appengine.api.datastore.Key>(this, "__key__", "key", com.google.appengine.api.datastore.Key.class);
+
+    /** */
+    public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, java.util.Date> timestamp = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, java.util.Date>(this, "timestamp", "timestamp", java.util.Date.class);
 
     /** */
     public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, java.lang.Long> version = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.round.Round, java.lang.Long>(this, "version", "version", java.lang.Long.class);
@@ -47,6 +50,7 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
         java.util.List<com.xhills.golf_party.common.course.Half> _halfs = blobToSerializable((com.google.appengine.api.datastore.Blob) entity.getProperty("halfs"));
         model.setHalfs(_halfs);
         model.setKey(entity.getKey());
+        model.setTimestamp((java.util.Date) entity.getProperty("timestamp"));
         model.setVersion((java.lang.Long) entity.getProperty("version"));
         model.setWeather(stringToEnum(com.xhills.golf_party.common.round.Weather.class, (java.lang.String) entity.getProperty("weather")));
         model.setWind(stringToEnum(com.xhills.golf_party.common.round.Wind.class, (java.lang.String) entity.getProperty("wind")));
@@ -68,6 +72,7 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
         entity.setProperty("courseRef", m.getCourseRef().getKey());
         entity.setProperty("date", m.getDate());
         entity.setUnindexedProperty("halfs", serializableToBlob(m.getHalfs()));
+        entity.setProperty("timestamp", m.getTimestamp());
         entity.setProperty("version", m.getVersion());
         entity.setProperty("weather", enumToString(m.getWeather()));
         entity.setProperty("wind", enumToString(m.getWind()));
@@ -154,6 +159,10 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
             writer.setNextPropertyName("roundGroupRef");
             encoder0.encode(writer, m.getRoundGroupRef());
         }
+        if(m.getTimestamp() != null){
+            writer.setNextPropertyName("timestamp");
+            encoder0.encode(writer, m.getTimestamp());
+        }
         if(m.getVersion() != null){
             writer.setNextPropertyName("version");
             encoder0.encode(writer, m.getVersion());
@@ -182,6 +191,8 @@ public final class RoundMeta extends org.slim3.datastore.ModelMeta<com.xhills.go
         reader = rootReader.newObjectReader("key");
         m.setKey(decoder0.decode(reader, m.getKey()));
         reader = rootReader.newObjectReader("roundGroupRef");
+        reader = rootReader.newObjectReader("timestamp");
+        m.setTimestamp(decoder0.decode(reader, m.getTimestamp()));
         reader = rootReader.newObjectReader("version");
         m.setVersion(decoder0.decode(reader, m.getVersion()));
         reader = rootReader.newObjectReader("weather");

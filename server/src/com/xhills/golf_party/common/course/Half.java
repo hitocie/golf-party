@@ -3,6 +3,10 @@ package com.xhills.golf_party.common.course;
 import java.io.Serializable;
 import java.util.List;
 
+import com.google.appengine.repackaged.org.json.JSONArray;
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
+
 public class Half implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,5 +25,16 @@ public class Half implements Serializable {
     }
     public void setHoles(List<Hole> holes) {
         this.holes = holes;
+    }
+    
+    
+    public JSONObject toJSONObject() throws JSONException {
+        JSONArray holes = new JSONArray();
+        for (Hole h : getHoles()) 
+            holes.put(h.toJSONObject());
+        
+        return new JSONObject()
+        .put("name", name)
+        .put("holes", holes);
     }
 }

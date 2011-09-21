@@ -10,8 +10,9 @@ import org.slim3.controller.Navigation;
 import com.google.appengine.repackaged.org.json.JSONArray;
 import com.google.appengine.repackaged.org.json.JSONObject;
 import com.xhills.golf_party.common.Me;
-import com.xhills.golf_party.common.Util;
 import com.xhills.golf_party.common.course.Half;
+import com.xhills.golf_party.common.utils.DateUtil;
+import com.xhills.golf_party.common.utils.JSONUtil;
 import com.xhills.golf_party.model.course.Course;
 import com.xhills.golf_party.model.round.Round;
 import com.xhills.golf_party.model.round.RoundGroup;
@@ -35,7 +36,7 @@ public class UpdateController extends Controller {
                 if (isPost()) {
                     // create
                     JSONObject obj = 
-                            Util.inputStreamToJSONObject(request.getInputStream());
+                            JSONUtil.inputStreamToJSONObject(request.getInputStream());
                     CourseService cs = new CourseService();
                     Round round = new Round();
                     round.setHalfs(new ArrayList<Half>());
@@ -49,9 +50,10 @@ public class UpdateController extends Controller {
                         if (name.equals(obj.getString("last_half"))) 
                             round.getHalfs().add(1, h);
                     }
-                    // TODO: date, wind, weather
-                    //String date = obj.getString("date");
-                    //round.setDate(Util.stringToDate(date));
+                    // TODO: wind, weather
+                    String date = obj.getString("date");
+                    if (date != null)
+                        round.setDate(DateUtil.toDate(date));
                     
                     JSONArray groups = obj.getJSONArray("groups");
                     List<RoundGroup> roundGroups = round.getRoundGroupRef().getModelList();

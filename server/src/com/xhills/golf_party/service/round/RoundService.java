@@ -1,6 +1,7 @@
 package com.xhills.golf_party.service.round;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slim3.datastore.Datastore;
@@ -25,6 +26,7 @@ public class RoundService {
     public Round createRound(Round round) throws Exception {
         
         round.setKey(Datastore.allocateId(RoundMeta.get()));
+        round.setTimestamp(new Date());
         
         List<RoundGroup> roundGroups = round.getRoundGroupRef().getModelList();
         List<List<RoundMember>> roundMembers = new ArrayList<List<RoundMember>>();

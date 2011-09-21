@@ -8,9 +8,9 @@ import org.slim3.controller.Navigation;
 
 import com.google.appengine.repackaged.org.json.JSONObject;
 import com.xhills.golf_party.common.Me;
-import com.xhills.golf_party.common.Util;
 import com.xhills.golf_party.common.course.Half;
 import com.xhills.golf_party.common.course.Hole;
+import com.xhills.golf_party.common.utils.JSONUtil;
 import com.xhills.golf_party.model.course.Course;
 import com.xhills.golf_party.service.course.CourseService;
 
@@ -29,14 +29,14 @@ public class UpdateController extends Controller {
                 if (isPost()) {
                     // create
                     JSONObject obj = 
-                            Util.inputStreamToJSONObject(request.getInputStream());
+                            JSONUtil.inputStreamToJSONObject(request.getInputStream());
                     log.info("Create new course. " + obj.getString("name") + " " + obj.getString("address"));
                     Course course = new Course();
                     course.setName(obj.getString("name"));
                     course.setAddress(obj.getString("address"));
                     course.setHalfs(new ArrayList<Half>());
-                    for (int i = 0; i < obj.getJSONArray("half").length(); i++) {
-                        JSONObject halfObj = obj.getJSONArray("half").getJSONObject(i);
+                    for (int i = 0; i < obj.getJSONArray("halfs").length(); i++) {
+                        JSONObject halfObj = obj.getJSONArray("halfs").getJSONObject(i);
                         Half half = new Half();
                         half.setHoles(new ArrayList<Hole>());
                         half.setName(halfObj.getString("name"));
