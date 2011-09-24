@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.common;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-20 22:00:30")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-24 21:30:34")
 /** */
 public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.common.User> {
 
@@ -12,6 +12,9 @@ public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.gol
 
     /** */
     public final org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User> name = new org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User>(this, "name", "name");
+
+    /** */
+    public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.common.User, java.util.Date> timestamp = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.common.User, java.util.Date>(this, "timestamp", "timestamp", java.util.Date.class);
 
     /** */
     public final org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User> token = new org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User>(this, "token", "token");
@@ -39,6 +42,7 @@ public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.gol
         model.setId((java.lang.String) entity.getProperty("id"));
         model.setKey(entity.getKey());
         model.setName((java.lang.String) entity.getProperty("name"));
+        model.setTimestamp((java.util.Date) entity.getProperty("timestamp"));
         model.setToken((java.lang.String) entity.getProperty("token"));
         model.setVersion((java.lang.Long) entity.getProperty("version"));
         return model;
@@ -55,6 +59,7 @@ public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.gol
         }
         entity.setProperty("id", m.getId());
         entity.setProperty("name", m.getName());
+        entity.setProperty("timestamp", m.getTimestamp());
         entity.setProperty("token", m.getToken());
         entity.setProperty("version", m.getVersion());
         entity.setProperty("slim3.schemaVersion", 1);
@@ -127,6 +132,10 @@ public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.gol
             writer.setNextPropertyName("name");
             encoder0.encode(writer, m.getName());
         }
+        if(m.getTimestamp() != null){
+            writer.setNextPropertyName("timestamp");
+            encoder0.encode(writer, m.getTimestamp());
+        }
         if(m.getToken() != null){
             writer.setNextPropertyName("token");
             encoder0.encode(writer, m.getToken());
@@ -149,6 +158,8 @@ public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.gol
         m.setKey(decoder0.decode(reader, m.getKey()));
         reader = rootReader.newObjectReader("name");
         m.setName(decoder0.decode(reader, m.getName()));
+        reader = rootReader.newObjectReader("timestamp");
+        m.setTimestamp(decoder0.decode(reader, m.getTimestamp()));
         reader = rootReader.newObjectReader("token");
         m.setToken(decoder0.decode(reader, m.getToken()));
         reader = rootReader.newObjectReader("version");

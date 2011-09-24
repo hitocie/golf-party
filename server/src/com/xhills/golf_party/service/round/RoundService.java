@@ -8,6 +8,7 @@ import org.slim3.datastore.Datastore;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Transaction;
+import com.xhills.golf_party.common.round.Score;
 import com.xhills.golf_party.meta.round.RoundGroupMeta;
 import com.xhills.golf_party.meta.round.RoundMemberMeta;
 import com.xhills.golf_party.meta.round.RoundMeta;
@@ -60,6 +61,24 @@ public class RoundService {
             throw e;
         }
         return round;
+    }
+    
+    public void updateScore(
+            Key rKey,
+            int group_idx,
+            int member_idx,
+            int hole_idx,
+            int score, 
+            int putter) throws Exception {
+        
+        RoundMeta m = RoundMeta.get();
+        Round round = Datastore.query(m)
+                .filter(m.key.equal(rKey)).asSingle();
+        RoundGroup rg = round.getRoundGroupRef().getModelList().get(group_idx);
+        RoundMember rm = rg.getRoundMemberRef().getModelList().get(member_idx);
+        Score s = rm.getScores().get(hole_idx);
+        s.setScore(score);
+        s.setPutter(putter);
     }
 
     /*

@@ -9,6 +9,7 @@ import org.slim3.controller.Navigation;
 
 import com.google.appengine.repackaged.org.json.JSONArray;
 import com.google.appengine.repackaged.org.json.JSONObject;
+import com.xhills.golf_party.common.Const;
 import com.xhills.golf_party.common.Me;
 import com.xhills.golf_party.common.course.Half;
 import com.xhills.golf_party.common.utils.DateUtil;
@@ -29,6 +30,8 @@ public class UpdateController extends Controller {
     @Override
     public Navigation run() throws Exception {
         
+        response.setContentType(Const.charEncoding);
+
         if (!isGet()) {
             
             Me me = (Me) sessionScope("me");
@@ -80,6 +83,9 @@ public class UpdateController extends Controller {
                     round.toJSONObject().write(response.getWriter());
                     
                     return null;
+                    
+                } else if (isPut()) {
+                    
                 }
             }
         }

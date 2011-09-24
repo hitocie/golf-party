@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.course;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-21 11:14:53")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-24 20:34:20")
 /** */
 public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.course.Course> {
 
@@ -14,7 +14,7 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
     public final org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.course.Course> name = new org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.course.Course>(this, "name", "name");
 
     /** */
-    public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, java.lang.Long> timestamp = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, java.lang.Long>(this, "timestamp", "timestamp", long.class);
+    public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, java.util.Date> timestamp = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, java.util.Date>(this, "timestamp", "timestamp", java.util.Date.class);
 
     /** */
     public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, java.lang.Long> version = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, java.lang.Long>(this, "version", "version", java.lang.Long.class);
@@ -41,7 +41,7 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
         model.setHalfs(_halfs);
         model.setKey(entity.getKey());
         model.setName((java.lang.String) entity.getProperty("name"));
-        model.setTimestamp(longToPrimitiveLong((java.lang.Long) entity.getProperty("timestamp")));
+        model.setTimestamp((java.util.Date) entity.getProperty("timestamp"));
         model.setVersion((java.lang.Long) entity.getProperty("version"));
         return model;
     }
@@ -134,8 +134,10 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
             writer.setNextPropertyName("name");
             encoder0.encode(writer, m.getName());
         }
-        writer.setNextPropertyName("timestamp");
-        encoder0.encode(writer, m.getTimestamp());
+        if(m.getTimestamp() != null){
+            writer.setNextPropertyName("timestamp");
+            encoder0.encode(writer, m.getTimestamp());
+        }
         if(m.getVersion() != null){
             writer.setNextPropertyName("version");
             encoder0.encode(writer, m.getVersion());

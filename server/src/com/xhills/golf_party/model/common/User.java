@@ -1,6 +1,7 @@
 package com.xhills.golf_party.model.common;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.Model;
@@ -46,6 +47,14 @@ public class User implements Serializable {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    
+    private Date timestamp;
+    public Date getTimestamp() {
+        return timestamp;
+    }
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
     
     //--------------------------

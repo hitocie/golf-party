@@ -13,6 +13,8 @@
         <property name="slim3.uploadFileSizeMax" value="100000"/>
         -->
 	    <property name="java.util.logging.config.file" value="WEB-INF/classes/logging.properties"/>
+	    <property name="file.encoding" value="UTF-8"/>
+	    <property name="DEFAULT_ENCODING" value="UTF-8"/> 
 	</system-properties>
 	<sessions-enabled>true</sessions-enabled>
 	<threadsafe>true</threadsafe>

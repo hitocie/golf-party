@@ -27,7 +27,7 @@ public class CourseService {
     public Course createCourse(Course course) throws Exception {
         
         course.setKey(Datastore.allocateId(CourseMeta.get()));
-        course.setTimestamp((new Date()).getTime());
+        course.setTimestamp(new Date());
         
         Transaction tx = Datastore.beginTransaction();
         try {

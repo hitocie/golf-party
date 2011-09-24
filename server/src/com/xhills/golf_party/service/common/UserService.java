@@ -1,5 +1,6 @@
 package com.xhills.golf_party.service.common;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slim3.datastore.Datastore;
@@ -25,6 +26,7 @@ public class UserService {
 
     public User createUser(User user) throws Exception {
         
+        user.setTimestamp(new Date());
         user.setKey(Datastore.allocateId(UserMeta.get()));
         
         Transaction tx = Datastore.beginTransaction();

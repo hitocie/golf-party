@@ -1,6 +1,7 @@
 package com.xhills.golf_party.model.course;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import org.slim3.datastore.Attribute;
@@ -42,11 +43,11 @@ public class Course implements Serializable {
         this.address = address;
     }
     
-    private long timestamp;
-    public long getTimestamp() {
+    private Date timestamp;
+    public Date getTimestamp() {
         return timestamp;
     }
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
     

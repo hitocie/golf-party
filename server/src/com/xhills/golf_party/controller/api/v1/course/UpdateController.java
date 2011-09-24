@@ -7,6 +7,7 @@ import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;
 
 import com.google.appengine.repackaged.org.json.JSONObject;
+import com.xhills.golf_party.common.Const;
 import com.xhills.golf_party.common.Me;
 import com.xhills.golf_party.common.course.Half;
 import com.xhills.golf_party.common.course.Hole;
@@ -21,6 +22,8 @@ public class UpdateController extends Controller {
     
     @Override
     public Navigation run() throws Exception {
+        
+        response.setContentType(Const.charEncoding);
         
         if (!isGet()) {
             

@@ -39,17 +39,18 @@ $(function() {
 $(function() {
 	$('#me').click(function() {
 		get_me(function(user) {
-			console.log('id=' + user.id + ' name=' + user.name);
+			dump_user(user);
 		});
 	});	
 });
 
 $(function() {
 	$('#course').click(function() {
-		var course = {
+		/*
+		var course1 = {
 				name: 'ABC country club',
 				address: 'Tokyo, Japan',
-				half: [{
+				halfs: [{
 					name: 'OUT',
 					holes: [
 					        {no: 1, par: 3, back: 400, white: 350, red: 250, handicap: 1},
@@ -78,9 +79,49 @@ $(function() {
 					        ]
 				}]
 		};
-		create_course(course, function(course) {
-			console.log('name=' + course.name + ' address=' + course.address);
-		});
+		var course2 = {
+				name: 'あいうえおカントリークラブ',
+				address: '東京都港区',
+				halfs: [{
+					name: 'ぜんはんコース',
+					holes: [
+					        {no: 1, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 2, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 3, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 4, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 5, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 6, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 7, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 8, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 9, par: 3, back: 400, white: 350, red: 250, handicap: 1}
+					        ]
+				},
+				{
+					name: 'こうはんコース',
+					holes: [
+					        {no: 10, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 11, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 12, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 13, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 14, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 15, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 16, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 17, par: 3, back: 400, white: 350, red: 250, handicap: 1},
+					        {no: 18, par: 3, back: 400, white: 350, red: 250, handicap: 1}
+					        ]
+				}]
+		};
+		var c1 = create_course(course1);
+		dump_course(c1);
+		var c2 = create_course(course2);
+		dump_course(c2);
+		*/
+		var courses = get_all_courses(function(courses) {
+			for (var i in courses) {
+				var c = courses[i];
+				dump_course(c);
+			}
+		}); 
 	});	
 });
 
@@ -99,8 +140,14 @@ $(function() {
 				         ]
 		};
 		round = create_round(round);
-		alert(round);
-
+		dump_round(round);
+		
+		get_all_rounds(function(rounds) {
+			for (var i in rounds) {
+				var r = rounds[i];
+				dump_round(r);
+			}
+		});
 	});	
 });
 

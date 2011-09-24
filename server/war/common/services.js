@@ -26,8 +26,8 @@ function async_request(args) {
 	});
 }
 function sync_request(args) {
+
 	var url = args.url;
-	//var success_handler = args.success_handler;
 	var data = args.data;
 	var type = args.type;
 	if (type == undefined)
@@ -40,12 +40,10 @@ function sync_request(args) {
 		async: false,
 		dataType: 'json',
 		cache: false,
-		contentType: 'application/json; charset=utf-8'//,
-		//success: success_handler,
-		//error: error_handler
+		contentType: 'application/json; charset=utf-8'
 	}).responseText;
 	
-	return response;
+	return JSON.parse(response);
 }
 
 
@@ -72,15 +70,20 @@ function get_me(p) {
 }
 
 // course
-function create_course(course, p) {
-	async_request({
+function create_course(course) {
+	var response = sync_request({
 			url: '/api/v1/course/update', 
-			success_handler: function(data, status) {
-				//alert(JSON.stringify(data));
-				p(data);
-			},
 			data: JSON.stringify(course),
 			type: 'POST'
+	});
+	return response;
+}
+function get_all_courses(p) {
+	async_request({
+		url: '/api/v1/course/get?service=all_courses',
+		success_handler: function(data, status) {
+			p(data);
+		}
 	});
 }
 
@@ -93,3 +96,12 @@ function create_round(round) {
 	});
 	return response;
 }
+function get_all_rounds(p) {
+	async_request({
+		url: '/api/v1/round/get?service=all_rounds',
+		success_handler: function(data, status) {
+			p(data);
+		}
+	});
+}
+
