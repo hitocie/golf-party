@@ -12,6 +12,8 @@ import com.google.appengine.repackaged.org.json.JSONObject;
 import com.xhills.golf_party.common.Const;
 import com.xhills.golf_party.common.Me;
 import com.xhills.golf_party.common.course.Half;
+import com.xhills.golf_party.common.round.Weather;
+import com.xhills.golf_party.common.round.Wind;
 import com.xhills.golf_party.common.utils.DateUtil;
 import com.xhills.golf_party.common.utils.JSONUtil;
 import com.xhills.golf_party.model.course.Course;
@@ -53,7 +55,24 @@ public class UpdateController extends Controller {
                         if (name.equals(obj.getString("last_half"))) 
                             round.getHalfs().add(1, h);
                     }
-                    // TODO: wind, weather
+                    int weather = obj.getInt("weather");
+                    if (weather == 0) 
+                        round.setWeather(Weather.fine);
+                    else if (weather == 1)
+                        round.setWeather(Weather.cloudy);
+                    else if (weather == 2)
+                        round.setWeather(Weather.rainy);
+                    else if (weather == 3)
+                        round.setWeather(Weather.snow);
+                    
+                    int wind = obj.getInt("wind");
+                    if (wind == 0)
+                        round.setWind(Wind.strong);
+                    else if (wind == 1)
+                        round.setWind(Wind.weak);
+                    else 
+                        round.setWind(Wind.no);
+                    
                     String date = obj.getString("date");
                     if (date != null)
                         round.setDate(DateUtil.toDate(date));
@@ -85,7 +104,36 @@ public class UpdateController extends Controller {
                     return null;
                     
                 } else if (isPut()) {
+                    // update
+                    JSONObject obj = 
+                            JSONUtil.inputStreamToJSONObject(request.getInputStream());
+                    JSONArray scores = obj.getJSONArray("scores");
+                    RoundService rs = new RoundService();
+                    for (int i = 0; i < scores.length(); i++) {
+                        JSONObject s = scores.getJSONObject(i);
+                        long id = s.getLong("id");
+                        int group = s.getInt("group");
+                        int member = s.getInt("member");
+                        int hole = s.getInt("hole");
+                        int score = s.getInt("score");
+                        int putter = s.getInt("putter");
+                        rs.updateScore(id, group, member, hole, score, putter);
+                    }
                     
+                    response.getWriter().write("null");
+
+                    return null;
+                    
+                } else if (isDelete()) {
+                    // delete
+                    JSONObject obj = 
+                            JSONUtil.inputStreamToJSONObject(request.getInputStream());
+                    RoundService rs = new RoundService();
+                    rs.deleteRound(obj.getLong("id"));
+
+                    response.getWriter().write("null");
+                    
+                    return null;
                 }
             }
         }

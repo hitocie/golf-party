@@ -7,20 +7,20 @@ public class TestUtil {
 
     public static void createUserData(UserService service) throws Exception {
         User user1 = new User();
-        user1.setId("10000");
-        user1.setName("Hitoshi Okada");
+        user1.setUserid("10000");
+        user1.setUsername("Hitoshi Okada");
 
         User user2 = new User();
-        user2.setId("20000");
-        user2.setName("Yuki Arai");
+        user2.setUserid("20000");
+        user2.setUsername("Yuki Arai");
 
         User user3 = new User();
-        user3.setId("30000");
-        user3.setName("Nao Okamoto");
+        user3.setUserid("30000");
+        user3.setUsername("Nao Okamoto");
 
         User user4 = new User();
-        user4.setId("40000");
-        user4.setName("Akira Mori");
+        user4.setUserid("40000");
+        user4.setUsername("Akira Mori");
         
         service.createUser(user1);
         service.createUser(user2);

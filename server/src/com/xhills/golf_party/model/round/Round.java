@@ -33,6 +33,13 @@ public class Round implements Serializable {
 
     
     //------------------------------
+    private long roundId;
+    public long getRoundId() {
+        return roundId;
+    }
+    public void setRoundId(long roundId) {
+        this.roundId = roundId;
+    }
     
     // Courseへの1対1の関連（外部キー）
     private ModelRef<Course> courseRef = new ModelRef<Course>(Course.class);
@@ -175,7 +182,8 @@ public class Round implements Serializable {
             roundGroups.put(rg.toJSONObject());
 
         return new JSONObject()
-        .put("course", courseRef.getModel().getName())
+        .put("id", roundId)
+        .put("course", courseRef.getModel().toJSONObject())
         .put("date", DateUtil.toString(date))
         .put("weather", weather)
         .put("wind", wind)

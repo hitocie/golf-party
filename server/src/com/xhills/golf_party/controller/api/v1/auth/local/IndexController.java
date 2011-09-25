@@ -22,15 +22,15 @@ public class IndexController extends Controller {
         User user = us.getUser(asString("id"));
         if (user == null) {
             user = new User();
-            user.setId(asString("id"));
-            user.setName(asString("name"));
+            user.setUserid(asString("id"));
+            user.setUsername(asString("name"));
             user.setToken("");
             user = us.createUser(user);
         }
         
         Me me = new MeForLocal(user);
         sessionScope("me", me);
-        log.info(me.getUser().getName() + " logged in");
+        log.info(me.getUser().getUsername() + " logged in");
         
         user.toJSONObject().write(response.getWriter());
         

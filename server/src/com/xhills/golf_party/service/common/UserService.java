@@ -14,13 +14,13 @@ public class UserService {
     
     public List<User> getAll() {
         UserMeta m = UserMeta.get();
-        return Datastore.query(m).sort(m.name.desc).asList();
+        return Datastore.query(m).sort(m.username.desc).asList();
     }
     
     public User getUser(String id) {
         UserMeta m = UserMeta.get();
         return Datastore.query(m)
-                .filter(m.id.equal(id))
+                .filter(m.userid.equal(id))
                 .asSingle();
     }
 

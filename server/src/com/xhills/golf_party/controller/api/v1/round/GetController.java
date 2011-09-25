@@ -23,14 +23,24 @@ public class GetController extends Controller {
             
             Me me = (Me) sessionScope("me");
             if (me != null) {
+                
                 if (service.equals("all_rounds")) {
-                    List<Round> rounds = (new RoundService()).getAll();
+                    List<Round> rounds = (new RoundService()).getAllRounds();
                     JSONArray out = new JSONArray();
                     for (Round r : rounds) {
                         out.put(r.toJSONObject());
                     }
                     out.write(response.getWriter());
+                    
+                } else if (service.equals("my_rounds")) {
+                    List<Round> rounds = (new RoundService()).getMyRounds(me.getUser());
+                    JSONArray out = new JSONArray();
+                    for (Round r : rounds) {
+                        out.put(r.toJSONObject());
+                    }
+                    out.write(response.getWriter());                    
                 }
+                
             }
         }
         

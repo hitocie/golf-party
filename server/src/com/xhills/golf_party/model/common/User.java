@@ -33,20 +33,20 @@ public class User implements Serializable {
         this.token = token;
     }
     
-    private String id; 
-    public String getId() {
-        return id;
+    private String userid; 
+    public String getUserid() {
+        return userid;
     }
-    public void setId(String id) {
-        this.id = id;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
-    private String name;
-    public String getName() {
-        return name;
+    private String username;
+    public String getUsername() {
+        return username;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
     
     private Date timestamp;
@@ -130,8 +130,8 @@ public class User implements Serializable {
     
     public JSONObject toJSONObject() throws JSONException {
         return new JSONObject()
-        .put("id", id)
-        .put("name", name)
+        .put("id", userid)
+        .put("name", username)
         .put("token", token);
     }
 }

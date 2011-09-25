@@ -27,6 +27,14 @@ public class Course implements Serializable {
 
     
     /*-------------------------------------*/
+    private long courseId;
+    public long getCourseId() {
+        return courseId;
+    }
+    public void setCourseId(long courseId) {
+        this.courseId = courseId;
+    }
+    
     private String name;
     public String getName() {
         return name;
@@ -138,8 +146,8 @@ public class Course implements Serializable {
         for (Half h : getHalfs()) {
             halfs.put(h.toJSONObject());
         }
-        // TODO:
         return new JSONObject()
+        .put("id", courseId)
         .put("name", name)
         .put("address", address)
         .put("timestamp", DateUtil.toString(timestamp))

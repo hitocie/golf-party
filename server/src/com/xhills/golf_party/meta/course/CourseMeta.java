@@ -1,11 +1,14 @@
 package com.xhills.golf_party.meta.course;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-24 20:34:20")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-25 15:31:12")
 /** */
 public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.course.Course> {
 
     /** */
     public final org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.course.Course> address = new org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.course.Course>(this, "address", "address");
+
+    /** */
+    public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, java.lang.Long> courseId = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, java.lang.Long>(this, "courseId", "courseId", long.class);
 
     /** */
     public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, com.google.appengine.api.datastore.Key> key = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, com.google.appengine.api.datastore.Key>(this, "__key__", "key", com.google.appengine.api.datastore.Key.class);
@@ -37,6 +40,7 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
     public com.xhills.golf_party.model.course.Course entityToModel(com.google.appengine.api.datastore.Entity entity) {
         com.xhills.golf_party.model.course.Course model = new com.xhills.golf_party.model.course.Course();
         model.setAddress((java.lang.String) entity.getProperty("address"));
+        model.setCourseId(longToPrimitiveLong((java.lang.Long) entity.getProperty("courseId")));
         java.util.List<com.xhills.golf_party.common.course.Half> _halfs = blobToSerializable((com.google.appengine.api.datastore.Blob) entity.getProperty("halfs"));
         model.setHalfs(_halfs);
         model.setKey(entity.getKey());
@@ -56,6 +60,7 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
             entity = new com.google.appengine.api.datastore.Entity(kind);
         }
         entity.setProperty("address", m.getAddress());
+        entity.setProperty("courseId", m.getCourseId());
         entity.setUnindexedProperty("halfs", serializableToBlob(m.getHalfs()));
         entity.setProperty("name", m.getName());
         entity.setProperty("timestamp", m.getTimestamp());
@@ -122,6 +127,8 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
             writer.setNextPropertyName("address");
             encoder0.encode(writer, m.getAddress());
         }
+        writer.setNextPropertyName("courseId");
+        encoder0.encode(writer, m.getCourseId());
         if(m.getHalfs() != null){
             writer.setNextPropertyName("halfs");
             // com.xhills.golf_party.common.course.Half is not supported.
@@ -152,6 +159,8 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
         org.slim3.datastore.json.Default decoder0 = new org.slim3.datastore.json.Default();
         reader = rootReader.newObjectReader("address");
         m.setAddress(decoder0.decode(reader, m.getAddress()));
+        reader = rootReader.newObjectReader("courseId");
+        m.setCourseId(decoder0.decode(reader, m.getCourseId()));
         reader = rootReader.newObjectReader("halfs");
         reader = rootReader.newObjectReader("key");
         m.setKey(decoder0.decode(reader, m.getKey()));

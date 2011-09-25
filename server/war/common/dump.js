@@ -16,7 +16,8 @@ function dump_course(course, tag) {
 		tag = '[Course]';
 	console.log(
 			tag +
-			' name= ' + course.name + 
+			' id=' + course.id + 
+			' name=' + course.name + 
 			' address=' + course.address +
 			' timestamp=' + course.timestamp 
 	);
@@ -27,9 +28,10 @@ function dump_round(round, tag) {
 		tag = '[Round]';
 	console.log(
 			tag +
-			' course= ' + round.course +
-			' timestamp= ' + round.timestamp +
-			' date= ' + round.date +
-			' groups= ' + round.groups
+			' id=' + round.id + 
+			' course=' + round.course.name +
+			' timestamp=' + round.timestamp +
+			' date=' + round.date +
+			' groups=' + JSON.stringify(round.groups)
 	);
 }

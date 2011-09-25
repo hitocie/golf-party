@@ -16,7 +16,7 @@ public class RoundServiceTest extends AppEngineTestCase {
 
     @Test
     public void test() throws Exception {
-        List<Round> roundList = service.getAll();
+        List<Round> roundList = service.getAllRounds();
         assertNotNull(roundList);
         assertTrue(roundList.isEmpty());
         
@@ -25,7 +25,7 @@ public class RoundServiceTest extends AppEngineTestCase {
 //        TestUtil.createCourseData(new CourseService(), "テストコース", "東京");
 //        TestUtil.createRoundData(service);
         
-        for (Round round : service.getAll()) {
+        for (Round round : service.getAllRounds()) {
             System.out.println(round.getWeather() + " " + round.getCourseRef().getModel().getName());
         }
             

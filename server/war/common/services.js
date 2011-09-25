@@ -57,15 +57,27 @@ function login_local(id, name, p) {
 			data: {id: id, name: name}
 	});
 }
+function isLogin() {
+	return sync_request({
+		url: '/api/v1/auth/facebook/check?service=login'
+	});
+}
 
 // me
 function get_me(p) {
 	async_request({
-			url: '/api/v1/me/get?service=me', 
-			success_handler: function(data, status) {
-				//alert(JSON.stringify(data));
-				p(data);
-			}
+		url: '/api/v1/me/get?service=me', 
+		success_handler: function(data, status) {
+			p(data);
+		}
+	});
+}
+function get_my_friends(p) {
+	async_request({
+		url: '/api/v1/me/get?service=my_friends',
+		success_handler: function(data, status) {
+			p(data);
+		}
 	});
 }
 
@@ -88,6 +100,18 @@ function get_all_courses(p) {
 }
 
 // round
+var Weather = {
+		fine: 0,
+	    cloudy: 1,
+	    rainy: 2,
+	    snow: 3
+};
+var Wind = {
+	    strong: 0,
+	    weak: 1,
+	    no: 2
+};
+
 function create_round(round) {
 	var response = sync_request({
 		url: '/api/v1/round/update', 
@@ -96,6 +120,29 @@ function create_round(round) {
 	});
 	return response;
 }
+function update_scores() {
+	var data = [];
+	for (var i = 0; i < arguments.length; i++) {
+		var s = arguments[i];
+		s.hole = s.hole - 1;
+		data.push(s);
+	}
+	var response = sync_request({
+		url: '/api/v1/round/update',
+		data: JSON.stringify({scores: data}),
+		type: 'PUT'
+	});
+	return response;
+}
+function delete_round(round) {
+	var response = sync_request({
+		url: '/api/v1/round/update',
+		data: JSON.stringify({id: round.id}),
+		type: 'DELETE'
+	});
+	return response;
+}
+
 function get_all_rounds(p) {
 	async_request({
 		url: '/api/v1/round/get?service=all_rounds',
@@ -104,4 +151,13 @@ function get_all_rounds(p) {
 		}
 	});
 }
+function get_my_rounds(p) {
+	async_request({
+		url: '/api/v1/round/get?service=my_rounds',
+		success_handler: function(data, status) {
+			p(data);
+		}
+	});
+}
+
 
