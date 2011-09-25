@@ -1,23 +1,23 @@
 package com.xhills.golf_party.meta.common;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-24 21:30:34")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-25 18:01:00")
 /** */
 public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.common.User> {
 
     /** */
-    public final org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User> id = new org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User>(this, "id", "id");
-
-    /** */
     public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.common.User, com.google.appengine.api.datastore.Key> key = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.common.User, com.google.appengine.api.datastore.Key>(this, "__key__", "key", com.google.appengine.api.datastore.Key.class);
-
-    /** */
-    public final org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User> name = new org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User>(this, "name", "name");
 
     /** */
     public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.common.User, java.util.Date> timestamp = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.common.User, java.util.Date>(this, "timestamp", "timestamp", java.util.Date.class);
 
     /** */
     public final org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User> token = new org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User>(this, "token", "token");
+
+    /** */
+    public final org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User> userid = new org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User>(this, "userid", "userid");
+
+    /** */
+    public final org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User> username = new org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.common.User>(this, "username", "username");
 
     /** */
     public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.common.User, java.lang.Long> version = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.common.User, java.lang.Long>(this, "version", "version", java.lang.Long.class);
@@ -39,11 +39,11 @@ public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.gol
     @Override
     public com.xhills.golf_party.model.common.User entityToModel(com.google.appengine.api.datastore.Entity entity) {
         com.xhills.golf_party.model.common.User model = new com.xhills.golf_party.model.common.User();
-        model.setId((java.lang.String) entity.getProperty("id"));
         model.setKey(entity.getKey());
-        model.setName((java.lang.String) entity.getProperty("name"));
         model.setTimestamp((java.util.Date) entity.getProperty("timestamp"));
         model.setToken((java.lang.String) entity.getProperty("token"));
+        model.setUserid((java.lang.String) entity.getProperty("userid"));
+        model.setUsername((java.lang.String) entity.getProperty("username"));
         model.setVersion((java.lang.Long) entity.getProperty("version"));
         return model;
     }
@@ -57,10 +57,10 @@ public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.gol
         } else {
             entity = new com.google.appengine.api.datastore.Entity(kind);
         }
-        entity.setProperty("id", m.getId());
-        entity.setProperty("name", m.getName());
         entity.setProperty("timestamp", m.getTimestamp());
         entity.setProperty("token", m.getToken());
+        entity.setProperty("userid", m.getUserid());
+        entity.setProperty("username", m.getUsername());
         entity.setProperty("version", m.getVersion());
         entity.setProperty("slim3.schemaVersion", 1);
         return entity;
@@ -120,17 +120,9 @@ public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.gol
         com.xhills.golf_party.model.common.User m = (com.xhills.golf_party.model.common.User) model;
         writer.beginObject();
         org.slim3.datastore.json.Default encoder0 = new org.slim3.datastore.json.Default();
-        if(m.getId() != null){
-            writer.setNextPropertyName("id");
-            encoder0.encode(writer, m.getId());
-        }
         if(m.getKey() != null){
             writer.setNextPropertyName("key");
             encoder0.encode(writer, m.getKey());
-        }
-        if(m.getName() != null){
-            writer.setNextPropertyName("name");
-            encoder0.encode(writer, m.getName());
         }
         if(m.getTimestamp() != null){
             writer.setNextPropertyName("timestamp");
@@ -139,6 +131,14 @@ public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.gol
         if(m.getToken() != null){
             writer.setNextPropertyName("token");
             encoder0.encode(writer, m.getToken());
+        }
+        if(m.getUserid() != null){
+            writer.setNextPropertyName("userid");
+            encoder0.encode(writer, m.getUserid());
+        }
+        if(m.getUsername() != null){
+            writer.setNextPropertyName("username");
+            encoder0.encode(writer, m.getUsername());
         }
         if(m.getVersion() != null){
             writer.setNextPropertyName("version");
@@ -152,16 +152,16 @@ public final class UserMeta extends org.slim3.datastore.ModelMeta<com.xhills.gol
         com.xhills.golf_party.model.common.User m = new com.xhills.golf_party.model.common.User();
         org.slim3.datastore.json.JsonReader reader = null;
         org.slim3.datastore.json.Default decoder0 = new org.slim3.datastore.json.Default();
-        reader = rootReader.newObjectReader("id");
-        m.setId(decoder0.decode(reader, m.getId()));
         reader = rootReader.newObjectReader("key");
         m.setKey(decoder0.decode(reader, m.getKey()));
-        reader = rootReader.newObjectReader("name");
-        m.setName(decoder0.decode(reader, m.getName()));
         reader = rootReader.newObjectReader("timestamp");
         m.setTimestamp(decoder0.decode(reader, m.getTimestamp()));
         reader = rootReader.newObjectReader("token");
         m.setToken(decoder0.decode(reader, m.getToken()));
+        reader = rootReader.newObjectReader("userid");
+        m.setUserid(decoder0.decode(reader, m.getUserid()));
+        reader = rootReader.newObjectReader("username");
+        m.setUsername(decoder0.decode(reader, m.getUsername()));
         reader = rootReader.newObjectReader("version");
         m.setVersion(decoder0.decode(reader, m.getVersion()));
         return m;
