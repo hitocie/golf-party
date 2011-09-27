@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.Model;
+import org.slim3.datastore.ModelRef;
 import org.slim3.util.DateUtil;
 
 import com.google.appengine.api.datastore.Key;
@@ -41,6 +42,12 @@ public class Course implements Serializable {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    
+    // Areaへの1対1の関連（外部キー）
+    private ModelRef<Area> areaRef = new ModelRef<Area>(Area.class);
+    public ModelRef<Area> getAreaRef() {
+        return areaRef;
     }
     
     private String address;
@@ -149,6 +156,7 @@ public class Course implements Serializable {
         return new JSONObject()
         .put("id", courseId)
         .put("name", name)
+        .put("area", areaRef.getModel().getName())
         .put("address", address)
         .put("timestamp", DateUtil.toString(timestamp))
         .put("halfs", halfs);

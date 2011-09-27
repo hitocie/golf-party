@@ -17,7 +17,7 @@ public class CourseServiceTest extends AppEngineTestCase {
     @Test
     public void test() throws Exception {
         
-        List<Course> courseList = service.getAll();
+        List<Course> courseList = service.getAllCourses();
         assertNotNull(courseList);
         assertTrue(courseList.isEmpty());
         

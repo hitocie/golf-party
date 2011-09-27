@@ -31,6 +31,7 @@ public class GetController extends Controller {
                         out.put(r.toJSONObject());
                     }
                     out.write(response.getWriter());
+                    return null;
                     
                 } else if (service.equals("my_rounds")) {
                     List<Round> rounds = (new RoundService()).getMyRounds(me.getUser());
@@ -39,6 +40,14 @@ public class GetController extends Controller {
                         out.put(r.toJSONObject());
                     }
                     out.write(response.getWriter());                    
+                    return null;
+
+                } else if (service.equals("round")) {
+                    long id = asLong("id");
+                    Round round = (new RoundService()).getRound(id);
+                    round.toJSONObject().write(response.getWriter());
+                    return null;
+    
                 }
                 
             }

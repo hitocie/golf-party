@@ -35,7 +35,10 @@ public class UpdateController extends Controller {
                             JSONUtil.inputStreamToJSONObject(request.getInputStream());
                     log.info("Create new course. " + obj.getString("name") + " " + obj.getString("address"));
                     Course course = new Course();
+                    CourseService cs = new CourseService();
+
                     course.setName(obj.getString("name"));
+                    course.getAreaRef().setModel(cs.getArea(obj.getString("area")));
                     course.setAddress(obj.getString("address"));
                     course.setHalfs(new ArrayList<Half>());
                     for (int i = 0; i < obj.getJSONArray("halfs").length(); i++) {
@@ -57,7 +60,6 @@ public class UpdateController extends Controller {
                         course.getHalfs().add(half);
                     }
                     
-                    CourseService cs = new CourseService();
                     course = cs.createCourse(course);
                     course.toJSONObject().write(response.getWriter());
                     

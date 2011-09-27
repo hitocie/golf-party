@@ -18,6 +18,7 @@ function dump_course(course, tag) {
 			tag +
 			' id=' + course.id + 
 			' name=' + course.name + 
+			' area=' + course.area +
 			' address=' + course.address +
 			' timestamp=' + course.timestamp 
 	);

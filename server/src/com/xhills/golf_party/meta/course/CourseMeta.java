@@ -1,11 +1,14 @@
 package com.xhills.golf_party.meta.course;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-25 15:31:12")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-27 23:51:17")
 /** */
 public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.course.Course> {
 
     /** */
     public final org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.course.Course> address = new org.slim3.datastore.StringAttributeMeta<com.xhills.golf_party.model.course.Course>(this, "address", "address");
+
+    /** */
+    public final org.slim3.datastore.ModelRefAttributeMeta<com.xhills.golf_party.model.course.Course, org.slim3.datastore.ModelRef<com.xhills.golf_party.model.course.Area>, com.xhills.golf_party.model.course.Area> areaRef = new org.slim3.datastore.ModelRefAttributeMeta<com.xhills.golf_party.model.course.Course, org.slim3.datastore.ModelRef<com.xhills.golf_party.model.course.Area>, com.xhills.golf_party.model.course.Area>(this, "areaRef", "areaRef", org.slim3.datastore.ModelRef.class, com.xhills.golf_party.model.course.Area.class);
 
     /** */
     public final org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, java.lang.Long> courseId = new org.slim3.datastore.CoreAttributeMeta<com.xhills.golf_party.model.course.Course, java.lang.Long>(this, "courseId", "courseId", long.class);
@@ -40,6 +43,10 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
     public com.xhills.golf_party.model.course.Course entityToModel(com.google.appengine.api.datastore.Entity entity) {
         com.xhills.golf_party.model.course.Course model = new com.xhills.golf_party.model.course.Course();
         model.setAddress((java.lang.String) entity.getProperty("address"));
+        if (model.getAreaRef() == null) {
+            throw new NullPointerException("The property(areaRef) is null.");
+        }
+        model.getAreaRef().setKey((com.google.appengine.api.datastore.Key) entity.getProperty("areaRef"));
         model.setCourseId(longToPrimitiveLong((java.lang.Long) entity.getProperty("courseId")));
         java.util.List<com.xhills.golf_party.common.course.Half> _halfs = blobToSerializable((com.google.appengine.api.datastore.Blob) entity.getProperty("halfs"));
         model.setHalfs(_halfs);
@@ -60,6 +67,10 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
             entity = new com.google.appengine.api.datastore.Entity(kind);
         }
         entity.setProperty("address", m.getAddress());
+        if (m.getAreaRef() == null) {
+            throw new NullPointerException("The property(areaRef) must not be null.");
+        }
+        entity.setProperty("areaRef", m.getAreaRef().getKey());
         entity.setProperty("courseId", m.getCourseId());
         entity.setUnindexedProperty("halfs", serializableToBlob(m.getHalfs()));
         entity.setProperty("name", m.getName());
@@ -90,6 +101,11 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
 
     @Override
     protected void assignKeyToModelRefIfNecessary(com.google.appengine.api.datastore.AsyncDatastoreService ds, java.lang.Object model) {
+        com.xhills.golf_party.model.course.Course m = (com.xhills.golf_party.model.course.Course) model;
+        if (m.getAreaRef() == null) {
+            throw new NullPointerException("The property(areaRef) must not be null.");
+        }
+        m.getAreaRef().assignKeyIfNecessary(ds);
     }
 
     @Override
@@ -127,6 +143,10 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
             writer.setNextPropertyName("address");
             encoder0.encode(writer, m.getAddress());
         }
+        if(m.getAreaRef() != null && m.getAreaRef().getKey() != null){
+            writer.setNextPropertyName("areaRef");
+            encoder0.encode(writer, m.getAreaRef(), maxDepth, currentDepth);
+        }
         writer.setNextPropertyName("courseId");
         encoder0.encode(writer, m.getCourseId());
         if(m.getHalfs() != null){
@@ -159,6 +179,8 @@ public final class CourseMeta extends org.slim3.datastore.ModelMeta<com.xhills.g
         org.slim3.datastore.json.Default decoder0 = new org.slim3.datastore.json.Default();
         reader = rootReader.newObjectReader("address");
         m.setAddress(decoder0.decode(reader, m.getAddress()));
+        reader = rootReader.newObjectReader("areaRef");
+        decoder0.decode(reader, m.getAreaRef(), maxDepth, currentDepth);
         reader = rootReader.newObjectReader("courseId");
         m.setCourseId(decoder0.decode(reader, m.getCourseId()));
         reader = rootReader.newObjectReader("halfs");

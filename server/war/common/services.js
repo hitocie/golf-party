@@ -57,7 +57,7 @@ function login_local(id, name, p) {
 			data: {id: id, name: name}
 	});
 }
-function isLogin() {
+function is_login() {
 	return sync_request({
 		url: '/api/v1/auth/facebook/check?service=login'
 	});
@@ -90,9 +90,26 @@ function create_course(course) {
 	});
 	return response;
 }
+function get_all_areas(p) {
+	async_request({
+		url: '/api/v1/course/get?service=all_areas',
+		success_handler: function(data, status) {
+			p(data);
+		}
+	});
+}
 function get_all_courses(p) {
 	async_request({
 		url: '/api/v1/course/get?service=all_courses',
+		success_handler: function(data, status) {
+			p(data);
+		}
+	});
+}
+function find_courses(area, keyword, p) {
+	async_request({
+		url: '/api/v1/course/get?service=find_courses',
+		data: {area: area, keyword: keyword},
 		success_handler: function(data, status) {
 			p(data);
 		}
@@ -154,6 +171,15 @@ function get_all_rounds(p) {
 function get_my_rounds(p) {
 	async_request({
 		url: '/api/v1/round/get?service=my_rounds',
+		success_handler: function(data, status) {
+			p(data);
+		}
+	});
+}
+function get_round(id, p) {
+	async_request({
+		url: '/api/v1/round/get?service=round',
+		data: {id: id},
 		success_handler: function(data, status) {
 			p(data);
 		}

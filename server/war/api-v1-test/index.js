@@ -1,14 +1,24 @@
 
+// global variables
+var g_me;
+
+
 /* Event handlers */
-$(window).load(function(){
+$(window).load(function() {
 	// load index.html
 	console.log('Loaded api-test-v1/index.html');
+	// if I logged in facebook, set user object to global variable.
+	if (is_login()) {
+		get_me(function(user) {
+			g_me = user;
+		});
+	}
 });
 
 $(function() {
 	$('#login').click(function() {
-		alert('Login? ' + isLogin());
-		if (!isLogin()) {
+		alert('Login? ' + is_login());
+		if (!is_login()) {
 			/*
 			login_local('200000', 'Yohsuke Sugahara', function(user) {
 				console.log('Logged in id=' + user.id + ' name=' + user.name);
@@ -21,6 +31,9 @@ $(function() {
 			});
 			*/
 			login_local('100000', 'Hitoshi Okada', function(user) {
+				get_me(function(user) {
+					g_me = user; // set user to global variable.
+				});
 				alert('Logged in id=' + user.id + ' name=' + user.name);
 			});
 		}
@@ -32,6 +45,7 @@ $(function() {
 		// me
 		get_me(function(user) {
 			dump_user(user);
+			
 			// friends
 			get_my_friends(function(friends) {
 				for (var i in friends) {
@@ -44,7 +58,19 @@ $(function() {
 
 $(function() {
 	$('#course_show').click(function() {
+		// get all areas
+		var areas = get_all_areas(function(areas) {
+			console.log('areas=' + JSON.stringify(areas));
+			
+			// find courses
+			find_courses(areas[0], null, function(courses) {
+				for (var i in courses) {
+					console.log('[Found courses] course=' + courses[i].name);
+				}
+			});
+		});
 		
+		// get all courses
 		var courses = get_all_courses(function(courses) {
 			for (var i in courses) {
 				var c = courses[i];
@@ -59,6 +85,7 @@ $(function() {
 		
 		var course1 = {
 				name: 'ABC country club',
+				area: '愛知県',
 				address: 'Tokyo, Japan',
 				halfs: [{
 					name: 'OUT',
@@ -91,6 +118,7 @@ $(function() {
 		};
 		var course2 = {
 				name: 'あいうえおカントリークラブ',
+				area: '東京都',
 				address: '東京都港区',
 				halfs: [{
 					name: 'ぜんはんコース',
@@ -138,7 +166,7 @@ $(function() {
 				weather: Weather.fine,
 				wind: Wind.no,
 				groups: [
-				         [{id: '100000', scores: null}, {id: '200000', scores: null}],
+				         [{id: g_me.id, scores: null}, {id: '200000', scores: null}],
 				         [{id: '300000', scores: null}, {id: '400000', scores: null}]
 				         ]
 		};
@@ -150,10 +178,17 @@ $(function() {
 $(function() {
 	$('#round_show').click(function() {
 
+		// get all my rounds
 		get_my_rounds(function(rounds) {
 			for (var i in rounds) {
 				var r = rounds[i];
-				dump_round(r);
+				//dump_round(r);
+
+				// get one round
+				get_round(r.id, function(round) {
+					dump_round(round);
+				});
+
 			}
 		});
 	});	
