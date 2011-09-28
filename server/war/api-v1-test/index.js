@@ -4,6 +4,8 @@ var g_me;
 
 
 /* Event handlers */
+// Don't work when not rel="external".
+/*
 $(window).load(function() {
 	// load index.html
 	console.log('Loaded api-test-v1/index.html');
@@ -14,6 +16,25 @@ $(window).load(function() {
 		});
 	}
 });
+*/
+
+// Event handler to show page. (instead of "load()")
+$(function() {
+    $("div[data-role*='page']").live('pageshow', function(event, ui) {
+    	if (this.id == 'page-test') {
+    		// load index.html
+    		console.log('Loaded api-test-v1/index.html');
+    		// if I logged in facebook, set user object to global variable.
+    		if (is_login()) {
+    			get_me(function(user) {
+    				g_me = user;
+    			});
+    		}
+    	}
+    });
+});
+
+
 
 $(function() {
 	$('#login').click(function() {
@@ -154,6 +175,18 @@ $(function() {
 		var c2 = create_course(course2);
 		dump_course(c2);
 	});	
+});
+
+$(function() {
+	$('#course_delete').click(function() {
+		// get all courses
+		var courses = get_all_courses(function(courses) {
+			for (var i in courses) {
+				// delete_course
+				delete_course(courses[i]);
+			}
+		}); 
+	});
 });
 
 $(function() {

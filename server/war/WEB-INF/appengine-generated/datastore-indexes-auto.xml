@@ -1,11 +1,4 @@
-<!-- Indices written at Tue, 27 Sep 2011 15:51:07 UTC -->
+<!-- Indices written at Wed, 28 Sep 2011 14:53:51 UTC -->
 
-<datastore-indexes>
+<datastore-indexes/>
 
-    <!-- Used 4 times in query history -->
-    <datastore-index kind="Course" ancestor="false" source="auto">
-        <property name="areaRef" direction="asc"/>
-        <property name="name" direction="asc"/>
-    </datastore-index>
-
-</datastore-indexes>

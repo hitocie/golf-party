@@ -56,6 +56,15 @@ public class CourseService {
         return Datastore.query(m).sort(m.name.desc).asList();
     }
     
+    // with id
+    public Course getCourse(long id) {
+        CourseMeta m = CourseMeta.get();
+        return Datastore.query(m)
+                .filter(m.courseId.equal(id))
+                .asSingle();
+    }
+    
+    // with name
     public Course getCourse(String name) {
         CourseMeta m = CourseMeta.get();
         return Datastore.query(m)
@@ -104,57 +113,13 @@ public class CourseService {
         return course;
     }
     
-    /*
-    public void createCourse(
-            Course course,
-            List<Half> halfs,
-            List<List<Hole>> halfHoles) throws Exception {
+    
+    public void deleteCourse(long id) throws Exception {
         
-        course.setKey(Datastore.allocateId(CourseMeta.get()));
-        course.setTimestamp((new Date()).getTime());
-        
-        for (int i = 0; i < halfs.size(); i++) {
-            Half half = halfs.get(i);
-            Key key = Datastore.createKey(course.getKey(), HalfMeta.get(), i + 1);
-            half.setKey(key);
-            half.getCourseRef().setModel(course);
-            List<Hole> holes = halfHoles.get(i);
-            for (int j = 0; j < holes.size(); j++) {
-                Hole hole = holes.get(j);
-                Key holeKey = Datastore.createKey(half.getKey(), HoleMeta.get(), j + 1);
-                hole.setKey(holeKey);
-                hole.getHalfRef().setModel(half);
-            }
-        }
-        
+        Course course = getCourse(id);
         
         Transaction tx = Datastore.beginTransaction();
         try {
-            Datastore.put(tx, course);
-            Datastore.put(tx, halfs);
-            for (List<Hole> holes : halfHoles)
-                Datastore.put(tx, holes);
-            tx.commit();
-        }
-        catch (Exception e) {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            throw e;
-        }
-    }
-    
-    
-    public void deleteCourse(Course course) throws Exception {
-        
-        Transaction tx = Datastore.beginTransaction();
-        try {
-            for (Half half : course.getHalfRef().getModelList()) {
-                for (Hole hole : half.getHoleRef().getModelList()) { 
-                    Datastore.delete(tx, hole.getKey());
-                }
-                Datastore.delete(tx, half.getKey());
-            }
             Datastore.delete(tx, course.getKey());
             tx.commit();
         }
@@ -165,5 +130,4 @@ public class CourseService {
             throw e;
         }
     }
-    */
 }

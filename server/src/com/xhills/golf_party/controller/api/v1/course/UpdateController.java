@@ -64,9 +64,18 @@ public class UpdateController extends Controller {
                     course.toJSONObject().write(response.getWriter());
                     
                     return null;
-                } else if (isDelete()) {
-                    // TODO:
                     
+                } else if (isDelete()) {
+                    // delete
+                    JSONObject obj = 
+                            JSONUtil.inputStreamToJSONObject(request.getInputStream());
+                    long id = obj.getLong("id");
+                    log.info("Delete course. " + id);
+                    CourseService cs = new CourseService();
+                    cs.deleteCourse(id);
+                    
+                    response.getWriter().write("null");
+                    return null;
                 }
             }
         }

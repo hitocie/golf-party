@@ -24,6 +24,7 @@ public class GetController extends Controller {
         response.setContentType(Const.charEncoding);
 
         String service = asString("service");
+        log.info("/course/get?service=" + service);
         if (service != null) {
             
             Me me = (Me) sessionScope("me");

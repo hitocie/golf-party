@@ -90,6 +90,15 @@ function create_course(course) {
 	});
 	return response;
 }
+function delete_course(course) {
+	var response = sync_request({
+		url: '/api/v1/course/update',
+		data: JSON.stringify({id: course.id}),
+		type: 'DELETE'
+	});
+	return response;
+}
+
 function get_all_areas(p) {
 	async_request({
 		url: '/api/v1/course/get?service=all_areas',
