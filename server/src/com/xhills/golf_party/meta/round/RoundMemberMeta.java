@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.round;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-09-25 18:00:33")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-10-07 17:07:26")
 /** */
 public final class RoundMemberMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.round.RoundMember> {
 

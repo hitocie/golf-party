@@ -1,4 +1,5 @@
 .DS_Store
+.Thumbs.db
 android/bin/*
 server/war/WEB-INF/classes/*
 
