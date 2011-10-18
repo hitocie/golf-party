@@ -1,0 +1,31 @@
+/* サンプルtableの共通設定
+----------------------------------------------------------- */
+table	{
+	border-collapse: collapse;	border-spacing: 0;
+	width: 100%;
+	margin-bottom: 30px;
+}
+th, td	{
+	padding: 10px 20px;
+	color: #1D5C79;
+}
+
+
+/* サンプル8
+----------------------------------------------------------- */
+.sample8	{
+	background: url(images/bg_td.jpg) no-repeat bottom;
+}
+.sample8 th	{
+	background: url(images/bg_th.jpg) no-repeat;
+	border-bottom: 1px solid #FFF;
+}
+.sample9 th.topL	{
+	background: url(images/bg_thl.jpg) no-repeat;
+}
+.sample8 th.topR	{
+	background: url(images/bg_thr.jpg) no-repeat top right;
+}
+.sample8 td	{
+	border-bottom: 1px solid #FFF;
+}
