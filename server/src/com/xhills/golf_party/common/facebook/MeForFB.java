@@ -4,8 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mortbay.log.Log;
+
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.types.FacebookType;
 import com.xhills.golf_party.common.Me;
 import com.xhills.golf_party.model.common.User;
 import com.xhills.golf_party.service.common.UserService;
@@ -15,6 +19,7 @@ public class MeForFB implements Me, Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private FacebookClient client;
     private String accessToken;
     private User user;
     private List<User> friends;
@@ -33,7 +38,7 @@ public class MeForFB implements Me, Serializable {
 
     
     public MeForFB(String token) throws Exception {
-        FacebookClient client = new DefaultFacebookClient(token);
+        client = new DefaultFacebookClient(token);
         com.restfb.types.User fbUser = 
                 client.fetchObject("me", com.restfb.types.User.class);
         
@@ -58,5 +63,16 @@ public class MeForFB implements Me, Serializable {
             friends.add(u);
         }
 
+    }
+
+    public void publishMessageToFeed(String msg) {
+        
+        FacebookType publishMessageResponse =
+                client.publish(
+                    "me/feed", 
+                    FacebookType.class,
+                    Parameter.with("message", msg));
+
+        Log.info("Published message ID: " + publishMessageResponse.getId());
     }
 }

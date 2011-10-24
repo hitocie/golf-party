@@ -29,4 +29,8 @@ public class MeForLocal implements Me, Serializable {
     public MeForLocal(User user) {
         this.user = user;
     }
+
+    public void publishMessageToFeed(String msg) {
+        // do nothing
+    }
 }

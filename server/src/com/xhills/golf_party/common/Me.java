@@ -10,4 +10,5 @@ public interface Me {
     public String getAccessToken();
     public User getUser();
     public List<User> getFriends();
+    public void publishMessageToFeed(String msg);
 }
