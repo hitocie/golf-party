@@ -19,7 +19,7 @@ public class MeForFB implements Me, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private FacebookClient client;
+    private transient FacebookClient client;
     private String accessToken;
     private User user;
     private List<User> friends;
