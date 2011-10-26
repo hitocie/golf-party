@@ -2,4 +2,7 @@
 .Thumbs.db
 android/bin/*
 server/war/WEB-INF/classes/*
+server/war/WEB-INF/appengine-generated/*
+server/src/com/xhills/golf_party/meta/*
+
 
