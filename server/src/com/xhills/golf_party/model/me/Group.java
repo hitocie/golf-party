@@ -6,8 +6,12 @@ import java.util.Set;
 
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.Model;
+import org.slim3.util.DateUtil;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.repackaged.org.json.JSONArray;
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
 
 @Model(schemaVersion = 1)
 public class Group implements Serializable {
@@ -134,5 +138,19 @@ public class Group implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    
+    public JSONObject toJSONObject() throws JSONException {
+        JSONArray users = new JSONArray();
+        for (String userid : userids) 
+            users.put(userid);
+
+        return new JSONObject()
+        .put("id", groupid)
+        .put("ownerid", ownerid)
+        .put("name", name)
+        .put("userids", users)
+        .put("timestamp", DateUtil.toString(timestamp));
     }
 }

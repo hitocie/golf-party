@@ -196,3 +196,56 @@ function get_round(id, p) {
 }
 
 
+// group
+function get_my_groups(p) {
+	async_request({
+		url: '/api/v1/me/get?service=my_groups',
+		success_handler: function(groups, status) {
+			// FIXME: Should have friends in client-cache.
+			get_my_friends(function(friends) {
+				for (var i in groups) {
+					var group = groups[i];
+					var users = [];
+					for (var j in group.userids) {
+						var u = group.userids[j];
+						for (var k in friends) {
+							var f = friends[k];
+							if (f.id == u) {
+								users.push({id: f.id, name: f.name});
+								break;
+							}
+						}
+					}
+					group.users = users;
+					delete group.userids;
+				}
+
+				p(groups);
+			});
+		}
+	});
+}
+function create_group(group) {
+	var response = sync_request({
+		url: '/api/v1/me/update', 
+		data: JSON.stringify(group),
+		type: 'POST'
+	});
+	return response;
+}
+function update_group(group) {
+	var response = sync_request({
+		url: '/api/v1/me/update',
+		data: JSON.stringify(group),
+		type: 'PUT'
+	});
+	return response;
+}
+function delete_group(group) {
+	var response = sync_request({
+		url: '/api/v1/me/update',
+		data: JSON.stringify({id: group.id}),
+		type: 'DELETE'
+	});
+	return response;
+}

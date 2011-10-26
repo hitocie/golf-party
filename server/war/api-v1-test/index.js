@@ -78,6 +78,37 @@ $(function() {
 });
 
 $(function() {
+	$('#group_show').click(function() {
+		get_my_groups(function(groups) {
+			for (var i in groups) {
+				dump_group(groups[i], '[Group]');
+			}
+		});
+	});	
+});
+
+$(function() {
+	$('#group_create').click(function() {
+		var g1 = {name: 'Group1', userids: ['100002631307450', '100001548684635']};
+		g1 = create_group(g1);
+		var g2 = {name: 'Group2', userids: ['100003033743897', '100002517446983', '100001760266437']};
+		g2 = create_group(g2);
+	});	
+});
+
+// TODO: update
+
+$(function() {
+	$('#group_delete').click(function() {
+		get_my_groups(function(groups) {
+			for (var i in groups) {
+				delete_group(groups[i].id);
+			}
+		});
+	});	
+});
+
+$(function() {
 	$('#course_show').click(function() {
 		// get all areas
 		var areas = get_all_areas(function(areas) {

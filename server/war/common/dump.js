@@ -11,6 +11,19 @@ function dump_user(user, tag) {
 	);
 }
 
+function dump_group(group, friends, tag) {
+	if (tag == undefined)
+		tag = '[Group]';
+	console.log(
+			tag +
+			' id=' + group.id + 
+			' owner=' + group.ownerid + 
+			' name=' + group.name + 
+			' users=' + JSON.stringify(group.users) +
+			' timestamp=' + group.timestamp
+	);
+}
+
 function dump_course(course, tag) {
 	if (tag == undefined)
 		tag = '[Course]';

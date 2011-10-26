@@ -1,13 +1,14 @@
-$(function() {
-    $("div[data-role*='page']").live('pageshow', function(event, ui) {
-    	if (this.id == 'group-list') {
-    		var groups = $('#groups');
-    		groups.listview();
-    		groups.empty(); // removed
-    		for (var i = 0; i < 10; i++) {
-    			groups.append('<li><a href="edit.html?from=list&row=' + i + '">グループ' + i + '</a></li>');
-    		}
-    		groups.listview('refresh');
-    	}
-    });
+
+$("#group-list").live('pageshow', function(event, ui) {
+	var lv = $('#groups');
+	lv.empty(); // removed
+	for (var i = 0; i < 10; i++) {
+		lv.append('<li><a href="edit.html' + to_query({row: i}) + '">グループ' + i + '</a></li>');
+	}
+	lv.listview('refresh');
 });
+
+$('#group-list').live('pagehide', function(event, ui) {
+	$('#group-list').die('pageshow');
+});
+

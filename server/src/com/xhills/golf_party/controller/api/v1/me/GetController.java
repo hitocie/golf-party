@@ -1,5 +1,7 @@
 package com.xhills.golf_party.controller.api.v1.me;
 
+import java.util.List;
+
 import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;
 
@@ -7,6 +9,8 @@ import com.google.appengine.repackaged.org.json.JSONArray;
 import com.xhills.golf_party.common.Const;
 import com.xhills.golf_party.common.Me;
 import com.xhills.golf_party.model.common.User;
+import com.xhills.golf_party.model.me.Group;
+import com.xhills.golf_party.service.me.GroupService;
 
 public class GetController extends Controller {
     
@@ -37,6 +41,17 @@ public class GetController extends Controller {
                     friends.write(response.getWriter());
                     
                     return null;
+                } else if (service.equals("my_groups")) {
+                    
+                    GroupService gs = new GroupService();
+                    List<Group> groupList = 
+                            gs.getMyGroups(me.getUser().getUserid());
+                    JSONArray groups = new JSONArray();
+                    for (Group group : groupList) {
+                        groups.put(group.toJSONObject());
+                    }
+                    groups.write(response.getWriter());
+                    
                 }
             }
         }        
