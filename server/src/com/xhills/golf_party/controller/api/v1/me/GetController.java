@@ -43,6 +43,7 @@ public class GetController extends Controller {
                     return null;
                 } else if (service.equals("my_groups")) {
                     
+                    // groups
                     GroupService gs = new GroupService();
                     List<Group> groupList = 
                             gs.getMyGroups(me.getUser().getUserid());

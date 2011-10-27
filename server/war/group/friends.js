@@ -5,7 +5,8 @@ $('#friend-list').live('pageshow', function(event, ui) {
 		lv.empty(); // removed
 		for (var i = 0 in friends) {
 			var f = friends[i];
-			lv.append('<li><a href="edit.html' + to_query(f) + '">' + f.name + '</a></li>');
+			lv.append('<li><a data-direction="reverse" href="edit.html' + to_query(f) + '">' + f.name + '</a></li>');
+			//lv.append('<li><a data-rel="back" data-direction="reverse">' + f.name + '</a></li>');
 		}
 		lv.listview('refresh');
 	});

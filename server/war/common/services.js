@@ -73,9 +73,16 @@ function get_me(p) {
 	});
 }
 function get_my_friends(p) {
+	// TODO: get from cache if possible.
+	remove_storage('friends'); // TODO: delete this line.
+	var friends = get_storage('friends');
+	if (friends != null)
+		p(friends);
+	
 	async_request({
 		url: '/api/v1/me/get?service=my_friends',
 		success_handler: function(data, status) {
+			set_storage('friends', data); // caching
 			p(data);
 		}
 	});
@@ -200,8 +207,8 @@ function get_round(id, p) {
 function get_my_groups(p) {
 	async_request({
 		url: '/api/v1/me/get?service=my_groups',
-		success_handler: function(groups, status) {
-			// FIXME: Should have friends in client-cache.
+		success_handler: function(data, status) {
+			var groups = data;
 			get_my_friends(function(friends) {
 				for (var i in groups) {
 					var group = groups[i];
@@ -219,7 +226,6 @@ function get_my_groups(p) {
 					group.users = users;
 					delete group.userids;
 				}
-
 				p(groups);
 			});
 		}

@@ -63,7 +63,7 @@ public class UpdateController extends Controller {
                     Group group =
                             gs.updateGroup(
                                 obj.getLong("id"), 
-                                obj.getString("ownerid"),
+                                me.getUser().getUserid(),
                                 obj.getString("name"),
                                 userids);
                     group.toJSONObject().write(response.getWriter());

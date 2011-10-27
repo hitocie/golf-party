@@ -22,3 +22,19 @@ function parse_query(q) {
 }
 
 
+// storage
+function set_storage(k, v) {
+	sessionStorage.setItem(k, JSON.stringify(v));
+}
+
+function get_storage(k) {
+	return JSON.parse(sessionStorage.getItem(k));
+}
+
+function remove_storage(k) {
+	sessionStorage.removeItem(k);
+}
+
+function clear_storage() {
+	sessionStorage.clear();
+}
