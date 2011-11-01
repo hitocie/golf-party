@@ -12,23 +12,21 @@
 		
 		<!-- header -->
 		<div data-role="header">
+			<a href="list.html" data-icon="arrow-l" data-direction="reverse">戻る</a>
 			<h1>グループ編集</h1>
+			<div class="ui-btn-right">
+				<a href="friends.html" data-icon="plus" data-role="button">メンバー追加</a>
+				<a id="save" href="#" data-icon="check" data-role="button">保存</a>
+			</div>
 		</div>
 
 		<!-- content -->
 		<div data-role="content">
-			<a id="save" href="#" data-role="button">保存</a>
-			<a href="friends.html" data-role="button">メンバー追加</a>
-			<ul id="members" data-role="listview" data-inset="true"></ul>
+			<ul id="members" data-role="listview" data-inset="true" data-split-icon="delete"></ul>
 		</div>
 
 		<!-- footer -->
 		<div data-role="footer" data-position="fixed" data-id="persistent" data-theme="b">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#" class="ui-btn-active" data-icon="home" data-iconpos="top">ホーム</a></li>
-				</ul>
-			</div>
 		</div>
 	</div>
 </body>
