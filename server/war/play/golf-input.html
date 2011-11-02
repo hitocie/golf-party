@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<div data-role="page">
+	<div id="golf-input" data-role="page">
 
 		<script src="golf-input.js"></script>
 
@@ -18,7 +18,7 @@
 
 		<!-- content -->
 		<div data-role="content">
-			<p>大平台カントリークラブ</p>
+			<label id="golf-name-l">test</label>
 			<div data-role="fieldcontain">
 				<label for="playdate">日付</label>
 				<input name="playdate" id="playdate" type="date" data-role="datebox"  data-options='{"mode": "calbox"'>
@@ -93,7 +93,7 @@
 
 			</div>
 			<div data-role="fieldcontain">
-				<a data-role="button" >プレー</a>
+				<a data-role="button" name="play"  id="play">プレー</a>
 			</div>
 		</div>
 
