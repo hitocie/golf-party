@@ -9,7 +9,7 @@ $('#group-edit').live('pageshow', function(event, ui) {
 		var users = JSON.parse(v.users);
 		for (var i = 0 in users) {
 			var u = users[i];
-			lv.append('<li><a href="#">' + u.name + '</a><a id="delete-user" href="#">' + u.id + '</a></li>');
+			lv.append('<li><a href="#">' + u.name + '</a><a id="delete-user" href="#" data-userid=' + u.id + '></a></li>');
 		}
 		lv.listview('refresh');
 		set_storage('group', {id: v.id, name: v.name, users: users});
@@ -31,7 +31,7 @@ $('#group-edit').live('pageshow', function(event, ui) {
 
 $('#delete-user').live('click', function() {
 	// TODO: val() ? text() ?
-	console.log($('#delete-user'));
+	console.log($('#delete-user').jqmData('userid'));
 });
 
 

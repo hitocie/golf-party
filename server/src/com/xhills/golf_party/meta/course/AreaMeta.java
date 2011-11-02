@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.course;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-10-31 23:54:23")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-11-02 12:46:16")
 /** */
 public final class AreaMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.course.Area> {
 

@@ -1,6 +1,6 @@
 package com.xhills.golf_party.meta.sample;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-10-31 23:54:22")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-11-02 12:46:15")
 /** */
 public final class HogeMeta extends org.slim3.datastore.ModelMeta<com.xhills.golf_party.model.sample.Hoge> {
 
