@@ -18,34 +18,36 @@
 
 		<!-- content -->
 		<div data-role="content">
-			<label id="golf-name-l">test</label>
+			<label id="golf-name">test</label>
 			<div data-role="fieldcontain">
 				<label for="playdate">日付</label>
-				<input name="playdate" id="playdate" type="date" data-role="datebox"  data-options='{"mode": "calbox"'>
+				<input id="play-date" type="date" data-role="datebox"></input>
 			</div>
 			<div data-role="fieldcontain">
 				<label for="select-choice-1" class="select">天候</label>
-					<select name="select-choice-1" id="select-choice-1">
-						<option value="1">晴れ</option>
-						<option value="2">曇り</option>
-						<option value="3">雨</option>
-						<option value="4">雪</option>
+					<select name="select-choice-1" id="weather">
+						<option value=Weather.fien>晴れ</option>
+						<option value=Weather.cloudy>曇り</option>
+						<option value=Weather.rainy>雨</option>
+						<option value=Weather.snow>雪</option>
 					</select>
 			</div>
 			<div data-role="fieldcontain">
 				<label for="select-choice-2" class="select">風</label>
-					<select name="select-choice-2" id="select-choice-2">
-						<option value="1">なし</option>
-						<option value="2">強風</option>
+					<select name="select-choice-2" id="wind">
+						<option value=Wind.no>なし</option>
+						<option value=Wind.weak>微風</option>
+						<option value=Wind.strong>強風</option>
 					</select>
 			</div>
 			<div data-role="fieldcontain">
 				<fieldset class="ui-grid-a">
 					<div class="ui-block-a">
 						<label for="user1">メンバ</label>
+						<a href="friends.html"  data-role="button" data-icon="plus" data-iconpos="notext">ボタン</a>
 					</div>
 					<div class="ui-block-b">
-						<a id ="user-add-button" data-role="button" data-icon="plus" data-iconpos="notext">ボタン</a>
+						<ul data-role="listview" data-inset="true"  id="menber-list"></ul>
 					</div>
 				</fieldset>
 			</div>
@@ -53,9 +55,10 @@
 				<fieldset class="ui-grid-a">
 					<div class="ui-block-a">
 						<label for="name">グループ</label>
+						<a href="friends.html" data-role="button" data-icon="plus" data-iconpos="notext">ボタン</a>
 					</div>
 					<div class="ui-block-b">
-						<a data-role="button" data-icon="plus" data-iconpos="notext">ボタン</a>
+						<ul data-role="listview" data-inset="true"  id="group-list"></ul>
 					</div>
 				</fieldset>
 			</div>
