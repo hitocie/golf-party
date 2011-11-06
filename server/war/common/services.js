@@ -247,10 +247,10 @@ function update_group(group) {
 	});
 	return response;
 }
-function delete_group(group) {
+function delete_group(groupid) {
 	var response = sync_request({
 		url: '/api/v1/me/update',
-		data: JSON.stringify({id: group.id}),
+		data: JSON.stringify({id: groupid}),
 		type: 'DELETE'
 	});
 	return response;
