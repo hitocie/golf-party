@@ -14,15 +14,19 @@ function parse_query(q) {
 
 $('#golf-round').live('pageshow', function(event, ui) {
 	alert('ロジック');
+	var v = get_storage('golf-round');
+	if (v != null) {
+		remove_storage('golf-round');
+	}
 	var prev_page = ui.prevPage[0].id;
 	if (prev_page == 'golf-input') {
-		var v = parse_query(location.search);
-		var jo = JSON.parse(decodeURI(v['j']));
-		round_info = jo;
+//		var v = parse_query(location.search);
+//		var jo = JSON.parse(decodeURI(v['j']));
+		round_info = v;
 
 		var golf_name = $('#golf-name');
 		golf_name.text(round_info.course);
-		console.log(golf_info.course);
+		console.log(round_info.course);
 		var menber_list = $('#menber-list');
 		for (var i = 0 in golf_info.groups) {
 			var menber = golf_info.groups[i];

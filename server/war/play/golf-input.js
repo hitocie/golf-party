@@ -26,6 +26,8 @@ $('#golf-input').live('pageshow', function(event, ui) {
 		var golf_name = $('#golf-name');
 		golf_name.text(golf_info.name);
 		console.log(golf_info.name);
+		var menber = $('#menber');
+		menber.append('<option value="standard">Standard: 7 day</option>');
 	} else if (prev_page == 'friend-list') {
 
 	}
@@ -82,5 +84,9 @@ function entry(){
 //
 //	location.href="golf-round.html?p=' + start-hole + '&j=' + round + '";
 	var str = encodeURI(JSON.stringify(round));
-	location.href="golf-round.html?j=' + str + '";
+//	location.href="golf-round.html?j=' + str + '";
+	set_storage('golf-round', round);
+	$.mobile.changePage(
+			'golf-round.html', 'pop', false, false
+	);
 };
