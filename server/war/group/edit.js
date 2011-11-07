@@ -1,61 +1,39 @@
 
-function create_list(users) {
-	var lv = $('#members');
-	lv.empty();
-	for (var i = 0 in users) {
-		var u = users[i];
-		lv.append('<li><a href="#">' + u.name + '</a><a id="delete-user" href="#" data-userid=' + u.id + '></a></li>');
-	}
-	lv.listview('refresh');	
-}
-
 
 $('#group-edit').live('pageshow', function(event, ui) {
 	var v = parse_query(location.search);
 	var name = v.name;
 	
-	var prev_page = ui.prevPage[0].id;
-	if (prev_page == 'group-list') {
-		var users = JSON.parse(v.users);
-		create_list(users);
+	var users = JSON.parse(v.users);
+	get_my_friends(function(friends) {
+		var sc = $('#select-members');
+		sc.empty();
+		for (var i = 0 in friends) {
+			var f = friends[i];
+			var flag = false;
+			for (var j = 0 in users) {
+				if (f.id == users[j].id) {
+					flag = true;
+					break;
+				}
+			}
+			if (flag)
+				sc.append('<option value="' + f.id + '" selected="true">' + f.name + '</option>');
+			else
+				sc.append('<option value="' + f.id + '">' + f.name + '</option>');
+		}
+		sc.selectmenu('refresh');
+
 		set_storage('group', {id: v.id, name: v.name, users: users});
-
-	} else if (prev_page == 'friend-list') {
-		var group = get_storage('group');
-		name = group.name;
-		// not back button
-		if (v.id != undefined) {
-			group.users.push({id: v.id, name: v.name});
-		}
-		create_list(group.users);
-		set_storage('group', group);
-	}
-	$('#group-name').text(name);
-});
-
-
-$('#delete-user').live('click', function() {
-	var userid = $(this).jqmData('userid');
-	var group = get_storage('group');
-	for (var i in group.users) {
-		var u = group.users[i];
-		if (u.id == userid) {
-			group.users.splice(i, 1);
-			set_storage('group', group);
-			break;
-		}
-	}
-	var lv = $('#members');
-	create_list(group.users);
+		$('#group-name').text(name);
+	});
 });
 
 
 $('#group-edit').live('pagehide', function(event, ui) {
 	$('#group-edit').die('pageshow');
-	$('#delete-user').die('click');
-	if (ui.nextPage[0].id == 'group-list') {
+	if (ui.nextPage[0].id == 'group-list')
 		remove_storage('group');
-	}
 });
 
 
@@ -67,4 +45,17 @@ $('#save').click(function() {
 		userids.push(u.id);
 	}
 	update_group({id: g.id, name: g.name, userids: userids});
+});
+
+
+$('#select-members').live('change', function() {
+	var group = get_storage('group');
+	group.users.splice(0, group.users.length);
+	var users = $(this).val();
+	if (users != null) {
+		for (var i = 0 in users) {
+			group.users.push({id: users[i]});
+		}
+	}
+	set_storage('group', group);
 });

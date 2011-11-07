@@ -15,15 +15,15 @@
 			<a href="list.html" data-icon="arrow-l" data-direction="reverse">戻る</a>
 			<h1>グループ編集</h1>
 			<div class="ui-btn-right">
-				<a href="friends.html" data-icon="plus" data-role="button">メンバー追加</a>
 				<a id="save" href="#" data-icon="check" data-role="button">保存</a>
 			</div>
 		</div>
 
 		<!-- content -->
 		<div data-role="content">
-			<label id="group-name"></label>
-			<ul id="members" data-role="listview" data-inset="true" data-split-icon="delete"></ul>
+			<label id="group-name"></label></p>
+			<label for="select-members" class="select">メンバー選択</label>
+			<select id="select-members" multiple="multiple" data-native-menu="false"></select>
 		</div>
 
 		<!-- footer -->
