@@ -73,19 +73,18 @@ function get_me(p) {
 	});
 }
 function get_my_friends(p) {
-	// TODO: get from cache if possible.
-	remove_storage('friends'); // TODO: delete this line.
 	var friends = get_storage('friends');
-	if (friends != null)
+	if (friends != null) {
 		p(friends);
-	
-	async_request({
-		url: '/api/v1/me/get?service=my_friends',
-		success_handler: function(data, status) {
-			set_storage('friends', data); // caching
-			p(data);
-		}
-	});
+	} else {
+		async_request({
+			url: '/api/v1/me/get?service=my_friends',
+			success_handler: function(data, status) {
+				set_storage('friends', data); // caching
+				p(data);
+			}
+		});
+	}
 }
 
 // course

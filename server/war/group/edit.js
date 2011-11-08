@@ -10,14 +10,14 @@ $('#group-edit').live('pageshow', function(event, ui) {
 		sc.empty();
 		for (var i = 0 in friends) {
 			var f = friends[i];
-			var flag = false;
+			var found = false;
 			for (var j = 0 in users) {
 				if (f.id == users[j].id) {
-					flag = true;
+					found = true;
 					break;
 				}
 			}
-			if (flag)
+			if (found)
 				sc.append('<option value="' + f.id + '" selected="true">' + f.name + '</option>');
 			else
 				sc.append('<option value="' + f.id + '">' + f.name + '</option>');
